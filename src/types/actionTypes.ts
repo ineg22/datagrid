@@ -1,18 +1,40 @@
-export interface AddArticlePayloadType {
-  tittle: string;
-  id: number;
+import { ThunkAction } from 'redux-thunk';
+import { PersonType, StateType } from './index';
+import {
+  DELETE_PERSON,
+  LOADING_END,
+  LOADING_START,
+  SHOW_ERROR,
+} from '../constants/action-types';
+
+interface DeletePersonActionType {
+  type: typeof DELETE_PERSON;
+  payload: PersonType;
 }
 
-export interface AddArticleActionType {
-  type: string;
-  payload: AddArticlePayloadType;
+interface LoadingEndActionType {
+  type: typeof LOADING_END;
+  payload: Array<PersonType>;
 }
 
-export interface ArticleType {
-  tittle: string;
-  id: number;
+interface LoadingStartActionType {
+  type: typeof LOADING_START;
 }
 
-export interface StateType {
-  articles: Array<ArticleType>;
+interface ShowErrorActionType {
+  type: typeof SHOW_ERROR;
+  payload: Error;
 }
+
+export type ActionTypes =
+  | DeletePersonActionType
+  | LoadingEndActionType
+  | LoadingStartActionType
+  | ShowErrorActionType;
+
+export type thunkLoadDataActionType<R> = ThunkAction<
+  R,
+  StateType,
+  unknown,
+  ActionTypes
+>;
