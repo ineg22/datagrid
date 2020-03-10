@@ -2,16 +2,32 @@ import React from 'react';
 
 import './TableHeader.scss';
 
-const TableHeader: React.FC = () => {
+interface Params {
+  columnVisibility: Array<boolean>;
+}
+
+const TableHeader: React.FC<Params> = ({ columnVisibility }) => {
+  const titlesArray = [
+    'id',
+    'first_name',
+    'last_name',
+    'gender',
+    'shirt_size',
+    'app_name',
+    'is_stable',
+  ];
   return (
     <tr className="header__raw">
-      <th className="header__col">id</th>
-      <th className="header__col">first_name</th>
-      <th className="header__col">last_name</th>
-      <th className="header__col">gender</th>
-      <th className="header__col">shirt_size</th>
-      <th className="header__col">app_name</th>
-      <th className="header__col">is_stable</th>
+      {titlesArray.map((el, i) => {
+        const className = columnVisibility[i]
+          ? 'header__col'
+          : 'header__col hidden';
+        return (
+          <th className={className} key={i}>
+            {el}
+          </th>
+        );
+      })}
     </tr>
   );
 };

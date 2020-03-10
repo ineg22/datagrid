@@ -8,18 +8,23 @@ import TableRaw from './TableRaw/TableRaw';
 import { StateType } from '../../types/index';
 
 const Table: React.FC = () => {
-  const { persons } = useSelector((state: StateType) => ({
+  const { persons, columnVisibility } = useSelector((state: StateType) => ({
     persons: state.persons,
+    columnVisibility: state.columnVisibility,
   }));
 
   return (
     <table className="table">
       <thead>
-        <TableHeader />
+        <TableHeader columnVisibility={columnVisibility} />
       </thead>
       <tbody>
         {persons.map(person => (
-          <TableRaw person={person} key={person.id} />
+          <TableRaw
+            person={person}
+            key={person.id}
+            columnVisibility={columnVisibility}
+          />
         ))}
       </tbody>
     </table>

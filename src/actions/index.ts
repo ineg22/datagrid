@@ -6,6 +6,7 @@ import {
   CHANGE_VIRTUALIZE,
   CHANGE_COUNT,
   LOAD_OFFLINE,
+  CHANGE_VISIBILITY,
 } from '../constants/action-types';
 import { ActionTypes } from '../types/actionTypes';
 import { PersonType } from '../types/index';
@@ -30,4 +31,7 @@ export function changeCount(payload: number): ActionTypes {
 }
 export function loadOffline(payload: number): ActionTypes {
   return { type: LOAD_OFFLINE, payload: payload };
+}
+export function changeVisibility(payload: Array<boolean>): ActionTypes {
+  return { type: CHANGE_VISIBILITY, payload: payload };
 }

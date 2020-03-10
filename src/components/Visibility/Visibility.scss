@@ -1,0 +1,24 @@
+.visibilityButton {
+  cursor: pointer;
+}
+
+.checkboxWrapper {
+  padding: 3px 0;
+
+  text-align: center;
+
+  user-select: none;
+
+  &:hover {
+    background-color: rgb(224, 224, 224);
+  }
+
+  label {
+    padding: 0 10px;
+  }
+
+  input,
+  label {
+    cursor: pointer;
+  }
+}

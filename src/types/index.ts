@@ -15,4 +15,5 @@ export interface StateType {
   isAsync: boolean;
   isVirtualize: boolean;
   rawCount: number;
+  columnVisibility: Array<boolean>;
 }

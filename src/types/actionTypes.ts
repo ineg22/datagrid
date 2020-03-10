@@ -9,6 +9,7 @@ import {
   CHANGE_ASYNC,
   CHANGE_VIRTUALIZE,
   CHANGE_COUNT,
+  CHANGE_VISIBILITY,
 } from '../constants/action-types';
 
 interface DeletePersonActionType {
@@ -45,6 +46,10 @@ interface LoadOfflineActionType {
   type: typeof LOAD_OFFLINE;
   payload: number;
 }
+interface ChangeVisibilityActionType {
+  type: typeof CHANGE_VISIBILITY;
+  payload: Array<boolean>;
+}
 
 export type ActionTypes =
   | DeletePersonActionType
@@ -54,7 +59,8 @@ export type ActionTypes =
   | ChangeAsyncActionType
   | ChangeVirtualizeActionType
   | ChangeCountActionType
-  | LoadOfflineActionType;
+  | LoadOfflineActionType
+  | ChangeVisibilityActionType;
 
 export type thunkLoadDataActionType<R> = ThunkAction<
   R,

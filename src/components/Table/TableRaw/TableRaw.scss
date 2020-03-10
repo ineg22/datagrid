@@ -5,7 +5,7 @@
     background-color: rgb(216, 215, 215);
 
     .content__col {
-      &--sticky {
+      &:nth-child(1) {
         background-color: rgb(216, 215, 215);
       }
     }
@@ -14,11 +14,11 @@
   .content__col {
     padding: 3px 5px;
 
-    &--bool {
+    &:nth-child(7) {
       text-align: center;
     }
 
-    &--sticky {
+    &:nth-child(1) {
       position: sticky;
       left: 0;
       z-index: 2;

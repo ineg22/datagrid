@@ -9,6 +9,7 @@ import {
   CHANGE_VIRTUALIZE,
   CHANGE_COUNT,
   LOAD_OFFLINE,
+  CHANGE_VISIBILITY,
 } from '../constants/action-types';
 
 const tableParamsString = window.localStorage.getItem('tableParams');
@@ -21,6 +22,9 @@ const initialState: StateType = {
   isAsync: tableParams ? tableParams.isAsync : false,
   isVirtualize: tableParams ? tableParams.isVirtualize : false,
   rawCount: tableParams ? tableParams.rawCount : 200,
+  columnVisibility: tableParams
+    ? tableParams.columnVisibility
+    : new Array(7).fill(true),
 };
 
 function rootReducer(state = initialState, action: ActionTypes): StateType {
@@ -39,6 +43,8 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, rawCount: action.payload };
     case LOAD_OFFLINE:
       return { ...state, persons: loadFakeData(action.payload) };
+    case CHANGE_VISIBILITY:
+      return { ...state, columnVisibility: action.payload };
     default:
       return state;
   }
