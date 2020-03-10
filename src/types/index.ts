@@ -12,4 +12,7 @@ export interface StateType {
   persons: Array<PersonType>;
   isLoading: boolean;
   error: Error | null;
+  isAsync: boolean;
+  isVirtualize: boolean;
+  rawCount: number;
 }

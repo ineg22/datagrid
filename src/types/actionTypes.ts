@@ -4,7 +4,11 @@ import {
   DELETE_PERSON,
   LOADING_END,
   LOADING_START,
+  LOAD_OFFLINE,
   SHOW_ERROR,
+  CHANGE_ASYNC,
+  CHANGE_VIRTUALIZE,
+  CHANGE_COUNT,
 } from '../constants/action-types';
 
 interface DeletePersonActionType {
@@ -23,14 +27,34 @@ interface LoadingStartActionType {
 
 interface ShowErrorActionType {
   type: typeof SHOW_ERROR;
-  payload: Error;
+  payload: Error | null;
+}
+interface ChangeAsyncActionType {
+  type: typeof CHANGE_ASYNC;
+  payload: boolean;
+}
+interface ChangeVirtualizeActionType {
+  type: typeof CHANGE_VIRTUALIZE;
+  payload: boolean;
+}
+interface ChangeCountActionType {
+  type: typeof CHANGE_COUNT;
+  payload: number;
+}
+interface LoadOfflineActionType {
+  type: typeof LOAD_OFFLINE;
+  payload: number;
 }
 
 export type ActionTypes =
   | DeletePersonActionType
   | LoadingEndActionType
   | LoadingStartActionType
-  | ShowErrorActionType;
+  | ShowErrorActionType
+  | ChangeAsyncActionType
+  | ChangeVirtualizeActionType
+  | ChangeCountActionType
+  | LoadOfflineActionType;
 
 export type thunkLoadDataActionType<R> = ThunkAction<
   R,

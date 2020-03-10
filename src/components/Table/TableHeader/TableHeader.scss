@@ -1,0 +1,13 @@
+.header__raw {
+  th {
+    position: sticky;
+    top: 45px;
+    z-index: 5;
+
+    background-color: rgb(216, 215, 215);
+  }
+}
+
+.header__col {
+  padding: 3px 5px 10px;
+}

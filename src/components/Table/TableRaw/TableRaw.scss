@@ -1,0 +1,31 @@
+.content__raw {
+  background-color: rgb(238, 237, 237);
+
+  &:hover {
+    background-color: rgb(216, 215, 215);
+
+    .content__col {
+      &--sticky {
+        background-color: rgb(216, 215, 215);
+      }
+    }
+  }
+
+  .content__col {
+    padding: 3px 5px;
+
+    &--bool {
+      text-align: center;
+    }
+
+    &--sticky {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+
+      text-align: initial;
+
+      background-color: rgb(238, 237, 237);
+    }
+  }
+}
