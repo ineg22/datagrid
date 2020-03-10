@@ -7,7 +7,6 @@ import { StateType } from './types/index';
 
 import Params from './components/Params/Params';
 import Table from './components/Table/Table';
-import Visibility from './components/Visibility/Visibility';
 import './App.scss';
 
 const App: React.FC = () => {
@@ -30,22 +29,15 @@ const App: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    renderTable(rawCount);
-  }, []); // [dispatch]
-
-  const renderHandle = (): void => {
-    renderTable(rawCount);
-  };
-
   return (
     <div className="App">
-      <Params renderHandle={renderHandle} />
-      <div>
-        <Visibility />
-      </div>
-      {isLoading ? <p className="loading">loading...</p> : null}
-      {error ? <p className="loading">{error.message}</p> : null}
+      <Params
+        renderHandle={(): void => {
+          renderTable(rawCount);
+        }}
+      />
+      {isLoading && <p className="loading">loading...</p>}
+      {error && <p className="loading">{error.message}</p>}
       {!isLoading && !error ? <Table /> : null}
     </div>
   );

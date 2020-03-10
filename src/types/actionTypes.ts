@@ -16,16 +16,17 @@ interface DeletePersonActionType {
   type: typeof DELETE_PERSON;
   payload: PersonType;
 }
-
+interface LoadingStartActionType {
+  type: typeof LOADING_START;
+}
 interface LoadingEndActionType {
   type: typeof LOADING_END;
   payload: Array<PersonType>;
 }
-
-interface LoadingStartActionType {
-  type: typeof LOADING_START;
+interface LoadOfflineActionType {
+  type: typeof LOAD_OFFLINE;
+  payload: number;
 }
-
 interface ShowErrorActionType {
   type: typeof SHOW_ERROR;
   payload: Error | null;
@@ -40,10 +41,6 @@ interface ChangeVirtualizeActionType {
 }
 interface ChangeCountActionType {
   type: typeof CHANGE_COUNT;
-  payload: number;
-}
-interface LoadOfflineActionType {
-  type: typeof LOAD_OFFLINE;
   payload: number;
 }
 interface ChangeVisibilityActionType {

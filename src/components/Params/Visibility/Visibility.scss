@@ -1,5 +1,11 @@
 .visibilityButton {
+  border: 1px solid transparent;
+  width: 75px;
   cursor: pointer;
+
+  &:hover {
+    border: 1px solid grey;
+  }
 }
 
 .checkboxWrapper {

@@ -1,7 +1,12 @@
 import faker from 'faker';
-import { PersonType } from '../types/index';
+import { Middleware } from 'redux';
 
-export const makeFake = (idx: number): PersonType => {
+import { LOAD_OFFLINE } from '../constants/action-types';
+import { PersonType } from '../types/index';
+import { ActionTypes } from '../types/actionTypes';
+import { endLoading } from '../actions/index';
+
+const makeFake = (idx: number): PersonType => {
   const genders = ['Female', 'Male'];
   const shirt_sizes = ['S', 'L', 'XL', '2XL', '3XL', 'M', 'XS'];
 
@@ -22,4 +27,15 @@ const loadFakeData = (count: number): Array<PersonType> => {
   return [...new Array(count)].map((_, idx) => makeFake(idx));
 };
 
-export default loadFakeData;
+const loadDataToStateMiddleware: Middleware = ({ dispatch }) => {
+  return function(next) {
+    return function(action): ActionTypes {
+      if (action.type === LOAD_OFFLINE) {
+        return dispatch(endLoading(loadFakeData(action.payload)));
+      }
+      return next(action);
+    };
+  };
+};
+
+export default loadDataToStateMiddleware;

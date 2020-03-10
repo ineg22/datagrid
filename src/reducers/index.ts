@@ -1,6 +1,5 @@
 import { ActionTypes } from '../types/actionTypes';
 import { StateType } from '../types/index';
-import loadFakeData from './loadFakeData';
 import {
   LOADING_END,
   LOADING_START,
@@ -8,7 +7,6 @@ import {
   CHANGE_ASYNC,
   CHANGE_VIRTUALIZE,
   CHANGE_COUNT,
-  LOAD_OFFLINE,
   CHANGE_VISIBILITY,
 } from '../constants/action-types';
 
@@ -41,8 +39,6 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, isVirtualize: action.payload };
     case CHANGE_COUNT:
       return { ...state, rawCount: action.payload };
-    case LOAD_OFFLINE:
-      return { ...state, persons: loadFakeData(action.payload) };
     case CHANGE_VISIBILITY:
       return { ...state, columnVisibility: action.payload };
     default:
