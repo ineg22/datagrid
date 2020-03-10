@@ -18,9 +18,9 @@ const initialState: StateType = {
   persons: [],
   isLoading: false,
   error: null,
-  isAsync: tableParams.isAsync || false,
-  isVirtualize: tableParams.isVirtualize || false,
-  rawCount: tableParams.rawCount || 200,
+  isAsync: tableParams ? tableParams.isAsync : false,
+  isVirtualize: tableParams ? tableParams.isVirtualize : false,
+  rawCount: tableParams ? tableParams.rawCount : 200,
 };
 
 function rootReducer(state = initialState, action: ActionTypes): StateType {

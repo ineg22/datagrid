@@ -66,7 +66,6 @@ const App: React.FC = () => {
     renderTable(rawCount);
   };
 
-  console.log(error ? error.message : null);
   return (
     <div className="App">
       <Params
