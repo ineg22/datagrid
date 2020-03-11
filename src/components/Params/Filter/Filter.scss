@@ -1,0 +1,19 @@
+.filterWrapper {
+  margin: 0 20px;
+}
+
+.filterInput {
+  width: 100px;
+  padding-left: 5px;
+
+  border: 1px solid rgb(190, 190, 190);
+  cursor: initial;
+
+  &:hover {
+    border: 1px solid grey;
+  }
+
+  &::placeholder {
+    color: lightgray;
+  }
+}

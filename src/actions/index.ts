@@ -7,7 +7,13 @@ import {
   CHANGE_COUNT,
   LOAD_OFFLINE,
   CHANGE_VISIBILITY,
+  CHANGE_FILTER_VALUE,
+  CHANGE_FILTERED_COLUMNS,
+  TRANSFORM_PERSONS,
+  SET_TRANSFORMED_PERSONS,
+  APPLY_FILTER,
 } from '../constants/action-types';
+
 import { ActionTypes } from '../types/actionTypes';
 import { PersonType } from '../types/index';
 
@@ -34,4 +40,19 @@ export function loadOffline(payload: number): ActionTypes {
 }
 export function changeVisibility(payload: Array<boolean>): ActionTypes {
   return { type: CHANGE_VISIBILITY, payload: payload };
+}
+export function changeFilterValue(payload: string): ActionTypes {
+  return { type: CHANGE_FILTER_VALUE, payload: payload };
+}
+export function changeFilteredColumns(payload: Array<boolean>): ActionTypes {
+  return { type: CHANGE_FILTERED_COLUMNS, payload: payload };
+}
+export function setTransformedPersons(payload: Array<PersonType>): ActionTypes {
+  return { type: SET_TRANSFORMED_PERSONS, payload: payload };
+}
+export function transformPersons(): ActionTypes {
+  return { type: TRANSFORM_PERSONS };
+}
+export function applyFilters(payload: boolean): ActionTypes {
+  return { type: APPLY_FILTER, payload: payload };
 }

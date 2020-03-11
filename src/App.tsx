@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import thunkLoadData from './actions/thunkLoadData';
-import { loadOffline, showError } from './actions/index';
+import { loadOffline, showError, setTransformedPersons } from './actions/index';
 import { StateType } from './types/index';
 
 import Params from './components/Params/Params';
@@ -21,6 +21,7 @@ const App: React.FC = () => {
   );
 
   const renderTable = (count: number): void => {
+    dispatch(setTransformedPersons([]));
     if (error) dispatch(showError(null));
     if (isAsync) {
       dispatch(thunkLoadData(count));
@@ -38,7 +39,7 @@ const App: React.FC = () => {
       />
       {isLoading && <p className="loading">loading...</p>}
       {error && <p className="loading">{error.message}</p>}
-      {!isLoading && !error ? <Table /> : null}
+      {!isLoading && !error && <Table />}
     </div>
   );
 };

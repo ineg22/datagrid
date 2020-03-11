@@ -10,10 +10,14 @@ export interface PersonType {
 
 export interface StateType {
   persons: Array<PersonType>;
+  transformed: Array<PersonType>;
   isLoading: boolean;
   error: Error | null;
   isAsync: boolean;
   isVirtualize: boolean;
   rawCount: number;
   columnVisibility: Array<boolean>;
+  filteredColumns: Array<boolean>;
+  filterValue: string;
+  filterApplied: boolean;
 }

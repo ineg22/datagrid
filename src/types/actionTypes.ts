@@ -10,6 +10,11 @@ import {
   CHANGE_VIRTUALIZE,
   CHANGE_COUNT,
   CHANGE_VISIBILITY,
+  CHANGE_FILTER_VALUE,
+  CHANGE_FILTERED_COLUMNS,
+  TRANSFORM_PERSONS,
+  SET_TRANSFORMED_PERSONS,
+  APPLY_FILTER,
 } from '../constants/action-types';
 
 interface DeletePersonActionType {
@@ -47,6 +52,25 @@ interface ChangeVisibilityActionType {
   type: typeof CHANGE_VISIBILITY;
   payload: Array<boolean>;
 }
+interface ChangeFilterValueActionType {
+  type: typeof CHANGE_FILTER_VALUE;
+  payload: string;
+}
+interface ChangeFilteredColumnsActionType {
+  type: typeof CHANGE_FILTERED_COLUMNS;
+  payload: Array<boolean>;
+}
+interface SetTransformedPersonsActionType {
+  type: typeof SET_TRANSFORMED_PERSONS;
+  payload: Array<PersonType>;
+}
+interface TransformPersonsActionType {
+  type: typeof TRANSFORM_PERSONS;
+}
+interface ApplyFilterActionType {
+  type: typeof APPLY_FILTER;
+  payload: boolean;
+}
 
 export type ActionTypes =
   | DeletePersonActionType
@@ -57,7 +81,12 @@ export type ActionTypes =
   | ChangeVirtualizeActionType
   | ChangeCountActionType
   | LoadOfflineActionType
-  | ChangeVisibilityActionType;
+  | ChangeVisibilityActionType
+  | ChangeFilterValueActionType
+  | ChangeFilteredColumnsActionType
+  | TransformPersonsActionType
+  | SetTransformedPersonsActionType
+  | ApplyFilterActionType;
 
 export type thunkLoadDataActionType<R> = ThunkAction<
   R,

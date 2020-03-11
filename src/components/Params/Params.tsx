@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StateType } from '../../types/index';
 
 import Visibility from './Visibility/Visibility';
+import Filter from './Filter/Filter';
 import {
   changeAsync,
   changeVirtualize,
@@ -18,14 +19,23 @@ interface Props {
 const Params: React.FC<Props> = ({ renderHandle }) => {
   const dispatch = useDispatch();
 
-  const { isAsync, isVirtualize, rawCount, columnVisibility } = useSelector(
-    (state: StateType) => ({
-      isAsync: state.isAsync,
-      isVirtualize: state.isVirtualize,
-      rawCount: state.rawCount,
-      columnVisibility: state.columnVisibility,
-    })
-  );
+  const {
+    isAsync,
+    isVirtualize,
+    rawCount,
+    columnVisibility,
+    filteredColumns,
+    filterValue,
+    filterApplied,
+  } = useSelector((state: StateType) => ({
+    isAsync: state.isAsync,
+    isVirtualize: state.isVirtualize,
+    rawCount: state.rawCount,
+    columnVisibility: state.columnVisibility,
+    filteredColumns: state.filteredColumns,
+    filterValue: state.filterValue,
+    filterApplied: state.filterApplied,
+  }));
 
   useEffect(() => {
     const params = JSON.stringify({
@@ -33,9 +43,20 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
       isVirtualize,
       rawCount,
       columnVisibility,
+      filteredColumns,
+      filterValue,
+      filterApplied,
     });
     window.localStorage.setItem('tableParams', params);
-  }, [isAsync, isVirtualize, rawCount, columnVisibility]);
+  }, [
+    isAsync,
+    isVirtualize,
+    rawCount,
+    columnVisibility,
+    filteredColumns,
+    filterValue,
+    filterApplied,
+  ]);
 
   const asyncToggleHandle = (): void => {
     dispatch(changeAsync(!isAsync));
@@ -74,19 +95,6 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
           />
           virtualize
         </label>
-        {/* <input
-      type="number"
-      name="inputCount"
-      value={rawCount}
-      className="inputCount"
-      min={10}
-      max={1000}
-      step={1}
-      onChange={(evt): void => {
-        const count = Number(evt.target.value);
-        changeCountHandle(count);
-      }}
-    /> */}
         <label htmlFor="rangeCount">
           Raw count:
           <input
@@ -102,7 +110,22 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
               changeCountHandle(count);
             }}
           />
-          <span>{rawCount}</span>
+          <input
+            type="number"
+            name="inputCount"
+            value={rawCount}
+            className="inputCount"
+            min={10}
+            max={1000}
+            step={1}
+            onChange={(evt): void => {
+              const count = Number(evt.target.value);
+
+              if (count > 9 && count < 1001 && count % 1 === 0) {
+                changeCountHandle(count);
+              }
+            }}
+          />
         </label>
         <button
           type="submit"
@@ -110,11 +133,13 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
             evt.preventDefault();
             renderHandle();
           }}
+          className="renderButton"
         >
           Render
         </button>
       </form>
       <div className="additionalTools">
+        <Filter />
         <Visibility />
       </div>
     </div>

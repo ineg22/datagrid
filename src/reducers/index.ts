@@ -8,6 +8,10 @@ import {
   CHANGE_VIRTUALIZE,
   CHANGE_COUNT,
   CHANGE_VISIBILITY,
+  CHANGE_FILTER_VALUE,
+  CHANGE_FILTERED_COLUMNS,
+  SET_TRANSFORMED_PERSONS,
+  APPLY_FILTER,
 } from '../constants/action-types';
 
 const tableParamsString = window.localStorage.getItem('tableParams');
@@ -15,14 +19,20 @@ const tableParams = tableParamsString ? JSON.parse(tableParamsString) : null;
 
 const initialState: StateType = {
   persons: [],
+  transformed: [],
   isLoading: false,
   error: null,
   isAsync: tableParams ? tableParams.isAsync : false,
   isVirtualize: tableParams ? tableParams.isVirtualize : false,
-  rawCount: tableParams ? tableParams.rawCount : 200,
+  rawCount: tableParams ? tableParams.rawCount : 20,
   columnVisibility: tableParams
     ? tableParams.columnVisibility
     : new Array(7).fill(true),
+  filteredColumns: tableParams
+    ? tableParams.filteredColumns
+    : new Array(7).fill(false),
+  filterValue: tableParams ? tableParams.filterValue : '',
+  filterApplied: tableParams ? tableParams.filterValue : false,
 };
 
 function rootReducer(state = initialState, action: ActionTypes): StateType {
@@ -41,6 +51,14 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, rawCount: action.payload };
     case CHANGE_VISIBILITY:
       return { ...state, columnVisibility: action.payload };
+    case CHANGE_FILTERED_COLUMNS:
+      return { ...state, filteredColumns: action.payload };
+    case CHANGE_FILTER_VALUE:
+      return { ...state, filterValue: action.payload };
+    case SET_TRANSFORMED_PERSONS:
+      return { ...state, transformed: action.payload };
+    case APPLY_FILTER:
+      return { ...state, filterApplied: action.payload };
     default:
       return state;
   }

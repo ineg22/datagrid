@@ -1,6 +1,5 @@
 .visibilityButton {
   border: 1px solid transparent;
-  width: 75px;
   cursor: pointer;
 
   &:hover {
@@ -9,9 +8,13 @@
 }
 
 .checkboxWrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
   padding: 3px 0;
+  overflow: hidden;
 
-  text-align: center;
+  cursor: pointer;
 
   user-select: none;
 
@@ -19,12 +22,9 @@
     background-color: rgb(224, 224, 224);
   }
 
-  label {
-    padding: 0 10px;
-  }
+  input {
+    margin-right: 8px;
 
-  input,
-  label {
     cursor: pointer;
   }
 }

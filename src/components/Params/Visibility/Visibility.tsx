@@ -1,10 +1,11 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 import { useDispatch, useSelector } from 'react-redux';
-import { StateType } from '../../../types/index';
 
+import { StateType } from '../../../types/index';
 import { changeVisibility } from '../../../actions/index';
 
+import { COLUMN_TITLES } from '../../../constants/columns';
 import './Visibility.scss';
 
 const Visibility: React.FC = () => {
@@ -23,11 +24,8 @@ const Visibility: React.FC = () => {
   return (
     <>
       <Popup
-        trigger={open => (
-          <button className="visibilityButton">
-            {open ? 'show' : 'hide'} cols
-          </button>
-        )}
+        trigger={<button className="visibilityButton">hide cols</button>}
+        on={['click']}
         position="bottom center"
         contentStyle={{ zIndex: 20 }}
         overlayStyle={{ zIndex: 10 }}
@@ -35,7 +33,7 @@ const Visibility: React.FC = () => {
         <div>
           {columnVisibility.map((el, i) => {
             return (
-              <div className="checkboxWrapper" key={i}>
+              <label className="checkboxWrapper" key={i}>
                 <input
                   type="checkbox"
                   name={`column${i}`}
@@ -44,8 +42,8 @@ const Visibility: React.FC = () => {
                   onChange={checkboxHandler}
                   checked={el}
                 />
-                <label htmlFor={`column${i}`}>column {i}</label>
-              </div>
+                {COLUMN_TITLES[i]}
+              </label>
             );
           })}
         </div>

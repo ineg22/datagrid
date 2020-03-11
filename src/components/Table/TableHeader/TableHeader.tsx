@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { COLUMN_TITLES } from '../../../constants/columns';
 import './TableHeader.scss';
 
 interface Params {
@@ -7,18 +8,9 @@ interface Params {
 }
 
 const TableHeader: React.FC<Params> = ({ columnVisibility }) => {
-  const titlesArray = [
-    'id',
-    'first_name',
-    'last_name',
-    'gender',
-    'shirt_size',
-    'app_name',
-    'is_stable',
-  ];
   return (
     <tr className="header__raw">
-      {titlesArray.map((el, i) => {
+      {COLUMN_TITLES.map((el, i) => {
         const className = columnVisibility[i]
           ? 'header__col'
           : 'header__col hidden';
