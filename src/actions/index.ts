@@ -12,10 +12,12 @@ import {
   TRANSFORM_PERSONS,
   SET_TRANSFORMED_PERSONS,
   APPLY_FILTER,
+  SET_SORT,
+  SET_SORT_LIGHT,
 } from '../constants/action-types';
 
 import { ActionTypes } from '../types/actionTypes';
-import { PersonType } from '../types/index';
+import { PersonType, SortBy } from '../types/index';
 
 export function endLoading(payload: Array<PersonType>): ActionTypes {
   return { type: LOADING_END, payload };
@@ -55,4 +57,10 @@ export function transformPersons(): ActionTypes {
 }
 export function applyFilters(payload: boolean): ActionTypes {
   return { type: APPLY_FILTER, payload: payload };
+}
+export function setSort(payload: Array<SortBy>): ActionTypes {
+  return { type: SET_SORT, payload: payload };
+}
+export function setSortLight(payload: [number, boolean]): ActionTypes {
+  return { type: SET_SORT_LIGHT, payload: payload };
 }

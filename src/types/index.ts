@@ -8,6 +8,11 @@ export interface PersonType {
   app_version: boolean;
 }
 
+export interface SortBy {
+  col: number;
+  up: boolean;
+  down: boolean;
+}
 export interface StateType {
   persons: Array<PersonType>;
   transformed: Array<PersonType>;
@@ -20,4 +25,5 @@ export interface StateType {
   filteredColumns: Array<boolean>;
   filterValue: string;
   filterApplied: boolean;
+  sortedParams: Array<SortBy>;
 }

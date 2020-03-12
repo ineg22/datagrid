@@ -18,7 +18,6 @@ const Table: React.FC = () => {
   );
 
   const renderedPersons = filterApplied ? transformed : persons;
-  console.log(transformed.length);
 
   return (
     <table className="table">

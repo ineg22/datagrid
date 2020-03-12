@@ -12,6 +12,7 @@ import {
   CHANGE_FILTERED_COLUMNS,
   SET_TRANSFORMED_PERSONS,
   APPLY_FILTER,
+  SET_SORT,
 } from '../constants/action-types';
 
 const tableParamsString = window.localStorage.getItem('tableParams');
@@ -33,6 +34,7 @@ const initialState: StateType = {
     : new Array(7).fill(false),
   filterValue: tableParams ? tableParams.filterValue : '',
   filterApplied: tableParams ? tableParams.filterValue : false,
+  sortedParams: tableParams ? tableParams.sortedParams : [],
 };
 
 function rootReducer(state = initialState, action: ActionTypes): StateType {
@@ -59,6 +61,8 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, transformed: action.payload };
     case APPLY_FILTER:
       return { ...state, filterApplied: action.payload };
+    case SET_SORT:
+      return { ...state, sortedParams: action.payload };
     default:
       return state;
   }

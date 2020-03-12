@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { PersonType, StateType } from './index';
+import { PersonType, StateType, SortBy } from './index';
 import {
   DELETE_PERSON,
   LOADING_END,
@@ -15,6 +15,8 @@ import {
   TRANSFORM_PERSONS,
   SET_TRANSFORMED_PERSONS,
   APPLY_FILTER,
+  SET_SORT,
+  SET_SORT_LIGHT,
 } from '../constants/action-types';
 
 interface DeletePersonActionType {
@@ -71,6 +73,14 @@ interface ApplyFilterActionType {
   type: typeof APPLY_FILTER;
   payload: boolean;
 }
+interface SetSortActionType {
+  type: typeof SET_SORT;
+  payload: Array<SortBy>;
+}
+interface SetSortLightActionType {
+  type: typeof SET_SORT_LIGHT;
+  payload: [number, boolean];
+}
 
 export type ActionTypes =
   | DeletePersonActionType
@@ -86,7 +96,9 @@ export type ActionTypes =
   | ChangeFilteredColumnsActionType
   | TransformPersonsActionType
   | SetTransformedPersonsActionType
-  | ApplyFilterActionType;
+  | ApplyFilterActionType
+  | SetSortActionType
+  | SetSortLightActionType;
 
 export type thunkLoadDataActionType<R> = ThunkAction<
   R,

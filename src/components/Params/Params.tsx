@@ -27,6 +27,7 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
     filteredColumns,
     filterValue,
     filterApplied,
+    sortedParams,
   } = useSelector((state: StateType) => ({
     isAsync: state.isAsync,
     isVirtualize: state.isVirtualize,
@@ -35,6 +36,7 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
     filteredColumns: state.filteredColumns,
     filterValue: state.filterValue,
     filterApplied: state.filterApplied,
+    sortedParams: state.sortedParams,
   }));
 
   useEffect(() => {
@@ -46,6 +48,7 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
       filteredColumns,
       filterValue,
       filterApplied,
+      sortedParams,
     });
     window.localStorage.setItem('tableParams', params);
   }, [
@@ -56,6 +59,7 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
     filteredColumns,
     filterValue,
     filterApplied,
+    sortedParams,
   ]);
 
   const asyncToggleHandle = (): void => {

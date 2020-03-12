@@ -1,0 +1,28 @@
+.SortButton {
+  display: inline-flex;
+  flex-direction: column;
+  width: 20px;
+  padding: 0;
+
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+
+  .sortLabel {
+    display: inline-block;
+    width: 20px;
+    height: 10px;
+
+    color: rgb(153, 153, 153);
+  }
+
+  .sortActive {
+    color: rgb(61, 61, 61);
+  }
+}
+
+.currentSortPlace {
+  display: inline-block;
+  width: 10px;
+}

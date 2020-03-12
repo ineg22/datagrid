@@ -20,7 +20,7 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
         const transformedPersons = persons.filter((el: PersonType) => {
           let isSatisfy = false;
 
-          filteredColumnNames.map((title: PersonKeys) => {
+          filteredColumnNames.forEach((title: PersonKeys) => {
             const rawSatisfy = el[title]
               .toString()
               .trim()
@@ -33,7 +33,6 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
           return isSatisfy;
         });
 
-        console.log(transformedPersons);
         return dispatch(setTransformedPersons(transformedPersons));
       }
       return next(action);
