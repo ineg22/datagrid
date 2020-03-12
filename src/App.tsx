@@ -2,7 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import thunkLoadData from './actions/thunkLoadData';
-import { loadOffline, showError, setTransformedPersons } from './actions/index';
+import {
+  loadOffline,
+  showError,
+  applyFilters,
+  setSortParams,
+} from './actions/index';
 import { StateType } from './types/index';
 
 import Params from './components/Params/Params';
@@ -21,7 +26,9 @@ const App: React.FC = () => {
   );
 
   const renderTable = (count: number): void => {
-    dispatch(setTransformedPersons([]));
+    dispatch(setSortParams([]));
+    dispatch(applyFilters(false));
+
     if (error) dispatch(showError(null));
     if (isAsync) {
       dispatch(thunkLoadData(count));

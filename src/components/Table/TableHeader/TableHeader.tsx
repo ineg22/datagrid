@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SortWidget from './SortWidget/SortWidget';
-import { COLUMN_TITLES, STRING_COLUMNS } from '../../../constants/columns';
+import { COLUMN_TITLES, COLUMNS_WITH_SORT } from '../../../constants/columns';
 import './TableHeader.scss';
 
 interface Params {
@@ -18,7 +18,7 @@ const TableHeader: React.FC<Params> = ({ columnVisibility }) => {
         return (
           <th className={className} key={i}>
             <span>{el}</span>
-            {STRING_COLUMNS[i] && <SortWidget col={i} />}
+            {COLUMNS_WITH_SORT[i] && <SortWidget col={i} />}
           </th>
         );
       })}

@@ -3,7 +3,7 @@ import { Middleware } from 'redux';
 import { SET_SORT_LIGHT } from '../constants/action-types';
 import { ActionTypes } from '../types/actionTypes';
 import { SortBy } from '../types/index';
-import { setSort } from '../actions/index';
+import { setSortParams } from '../actions/index';
 
 const getNextState = ({ col, up, down }: SortBy): SortBy => {
   if (up) return { col, up: false, down: false };
@@ -38,9 +38,9 @@ const setSortMiddleware: Middleware = ({ dispatch, getState }) => {
             down: sortedDown,
           });
           if (nextState.up || nextState.down) {
-            return dispatch(setSort([nextState]));
+            return dispatch(setSortParams([nextState]));
           }
-          return dispatch(setSort([]));
+          return dispatch(setSortParams([]));
         }
 
         // with SHIFT
@@ -65,7 +65,7 @@ const setSortMiddleware: Middleware = ({ dispatch, getState }) => {
           newSortedParams.push({ col, up: false, down: true });
         }
 
-        return dispatch(setSort(newSortedParams));
+        return dispatch(setSortParams(newSortedParams));
       }
       return next(action);
     };

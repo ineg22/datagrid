@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateType } from '../../../../types/index';
-import { setSortLight } from '../../../../actions/index';
+import { setSortLight, transformPersons } from '../../../../actions/index';
 
 import './SortWidget.scss';
 
@@ -31,6 +31,8 @@ const SortWidget: React.FC<Props> = ({ col }) => {
     evt.shiftKey
       ? dispatch(setSortLight([col, true]))
       : dispatch(setSortLight([col, false]));
+
+    dispatch(transformPersons());
   };
 
   return (

@@ -28,13 +28,13 @@ const Filter: React.FC = () => {
     const newFilterColumns = [...filteredColumns];
     newFilterColumns[number] = !newFilterColumns[number];
     dispatch(changeFilteredColumns(newFilterColumns));
-    dispatch(transformPersons());
+    if (filterApplied) dispatch(transformPersons());
   };
 
   const inputHandler = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const value = evt.target.value.trim().toLowerCase();
     dispatch(changeFilterValue(value));
-    dispatch(transformPersons());
+    if (filterApplied) dispatch(transformPersons());
   };
 
   const applyFilterHandler = (
@@ -42,6 +42,7 @@ const Filter: React.FC = () => {
   ): void => {
     const value = evt.target.checked;
     dispatch(applyFilters(value));
+    dispatch(transformPersons());
   };
 
   return (

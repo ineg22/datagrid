@@ -10,9 +10,11 @@ import {
   CHANGE_VISIBILITY,
   CHANGE_FILTER_VALUE,
   CHANGE_FILTERED_COLUMNS,
-  SET_TRANSFORMED_PERSONS,
+  SET_TRANSFORMED_BY_FILTER,
+  SET_TRANSFORMED_BY_SORT,
   APPLY_FILTER,
-  SET_SORT,
+  SET_SORT_PARAMS,
+  SET_TRANSFORMED,
 } from '../constants/action-types';
 
 const tableParamsString = window.localStorage.getItem('tableParams');
@@ -20,6 +22,8 @@ const tableParams = tableParamsString ? JSON.parse(tableParamsString) : null;
 
 const initialState: StateType = {
   persons: [],
+  transformedByFilter: [],
+  transformedBySort: [],
   transformed: [],
   isLoading: false,
   error: null,
@@ -57,12 +61,16 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, filteredColumns: action.payload };
     case CHANGE_FILTER_VALUE:
       return { ...state, filterValue: action.payload };
-    case SET_TRANSFORMED_PERSONS:
-      return { ...state, transformed: action.payload };
+    case SET_TRANSFORMED_BY_SORT:
+      return { ...state, transformedBySort: action.payload };
+    case SET_TRANSFORMED_BY_FILTER:
+      return { ...state, transformedByFilter: action.payload };
     case APPLY_FILTER:
       return { ...state, filterApplied: action.payload };
-    case SET_SORT:
+    case SET_SORT_PARAMS:
       return { ...state, sortedParams: action.payload };
+    case SET_TRANSFORMED:
+      return { ...state, transformed: action.payload };
     default:
       return state;
   }

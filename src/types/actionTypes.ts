@@ -13,10 +13,12 @@ import {
   CHANGE_FILTER_VALUE,
   CHANGE_FILTERED_COLUMNS,
   TRANSFORM_PERSONS,
-  SET_TRANSFORMED_PERSONS,
+  SET_TRANSFORMED_BY_SORT,
+  SET_TRANSFORMED_BY_FILTER,
   APPLY_FILTER,
-  SET_SORT,
+  SET_SORT_PARAMS,
   SET_SORT_LIGHT,
+  SET_TRANSFORMED,
 } from '../constants/action-types';
 
 interface DeletePersonActionType {
@@ -62,8 +64,16 @@ interface ChangeFilteredColumnsActionType {
   type: typeof CHANGE_FILTERED_COLUMNS;
   payload: Array<boolean>;
 }
+interface SetTransformedBySortPersonsActionType {
+  type: typeof SET_TRANSFORMED_BY_SORT;
+  payload: Array<PersonType>;
+}
+interface SetTransformedByFilterPersonsActionType {
+  type: typeof SET_TRANSFORMED_BY_FILTER;
+  payload: Array<PersonType>;
+}
 interface SetTransformedPersonsActionType {
-  type: typeof SET_TRANSFORMED_PERSONS;
+  type: typeof SET_TRANSFORMED;
   payload: Array<PersonType>;
 }
 interface TransformPersonsActionType {
@@ -74,7 +84,7 @@ interface ApplyFilterActionType {
   payload: boolean;
 }
 interface SetSortActionType {
-  type: typeof SET_SORT;
+  type: typeof SET_SORT_PARAMS;
   payload: Array<SortBy>;
 }
 interface SetSortLightActionType {
@@ -95,10 +105,12 @@ export type ActionTypes =
   | ChangeFilterValueActionType
   | ChangeFilteredColumnsActionType
   | TransformPersonsActionType
-  | SetTransformedPersonsActionType
+  | SetTransformedBySortPersonsActionType
+  | SetTransformedByFilterPersonsActionType
   | ApplyFilterActionType
   | SetSortActionType
-  | SetSortLightActionType;
+  | SetSortLightActionType
+  | SetTransformedPersonsActionType;
 
 export type thunkLoadDataActionType<R> = ThunkAction<
   R,

@@ -8,16 +8,22 @@ import TableRaw from './TableRaw/TableRaw';
 import { StateType } from '../../types/index';
 
 const Table: React.FC = () => {
-  const { persons, columnVisibility, transformed, filterApplied } = useSelector(
-    (state: StateType) => ({
-      persons: state.persons,
-      columnVisibility: state.columnVisibility,
-      transformed: state.transformed,
-      filterApplied: state.filterApplied,
-    })
-  );
+  const {
+    persons,
+    columnVisibility,
+    transformed,
+    filterApplied,
+    sortedParams,
+  } = useSelector((state: StateType) => ({
+    persons: state.persons,
+    columnVisibility: state.columnVisibility,
+    transformed: state.transformed,
+    filterApplied: state.filterApplied,
+    sortedParams: state.sortedParams,
+  }));
 
-  const renderedPersons = filterApplied ? transformed : persons;
+  const renderedPersons =
+    filterApplied || sortedParams.length ? transformed : persons;
 
   return (
     <table className="table">

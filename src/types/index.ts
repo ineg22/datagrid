@@ -15,6 +15,8 @@ export interface SortBy {
 }
 export interface StateType {
   persons: Array<PersonType>;
+  transformedByFilter: Array<PersonType>;
+  transformedBySort: Array<PersonType>;
   transformed: Array<PersonType>;
   isLoading: boolean;
   error: Error | null;
