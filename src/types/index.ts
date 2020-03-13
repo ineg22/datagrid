@@ -34,5 +34,5 @@ export interface StateType {
   filterValue: string;
   filterApplied: boolean;
   sortedParams: Array<SortBy>;
-  // enumFilterParams: Array<EnumFilterParam>;
+  enumFilterParams: Array<EnumFilterParam>;
 }

@@ -16,10 +16,12 @@ import {
   SET_SORT_PARAMS,
   SET_SORT_LIGHT,
   SET_TRANSFORMED,
+  SET_ENUM_FILTER_PARAMS,
+  SET_ENUM_FILTER_PARAM,
 } from '../constants/action-types';
 
 import { ActionTypes } from '../types/actionTypes';
-import { PersonType, SortBy } from '../types/index';
+import { PersonType, SortBy, EnumFilterParam } from '../types/index';
 
 export function endLoading(payload: Array<PersonType>): ActionTypes {
   return { type: LOADING_END, payload };
@@ -71,4 +73,10 @@ export function setSortParams(payload: Array<SortBy>): ActionTypes {
 }
 export function setSortLight(payload: [number, boolean]): ActionTypes {
   return { type: SET_SORT_LIGHT, payload: payload };
+}
+export function setEnumFilterParam(payload: EnumFilterParam): ActionTypes {
+  return { type: SET_ENUM_FILTER_PARAM, payload: payload };
+}
+export function setEnumFilterParams(payload: Array<EnumFilterParam>): ActionTypes {
+  return { type: SET_ENUM_FILTER_PARAMS, payload: payload };
 }

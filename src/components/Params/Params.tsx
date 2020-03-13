@@ -15,18 +15,27 @@ interface Props {
 const Params: React.FC<Props> = ({ renderHandle }) => {
   const dispatch = useDispatch();
 
-  const { isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, filterApplied, sortedParams } = useSelector(
-    (state: StateType) => ({
-      isAsync: state.isAsync,
-      isVirtualize: state.isVirtualize,
-      rawCount: state.rawCount,
-      columnVisibility: state.columnVisibility,
-      filteredColumns: state.filteredColumns,
-      filterValue: state.filterValue,
-      filterApplied: state.filterApplied,
-      sortedParams: state.sortedParams,
-    })
-  );
+  const {
+    isAsync,
+    isVirtualize,
+    rawCount,
+    columnVisibility,
+    filteredColumns,
+    filterValue,
+    filterApplied,
+    sortedParams,
+    enumFilterParams,
+  } = useSelector((state: StateType) => ({
+    isAsync: state.isAsync,
+    isVirtualize: state.isVirtualize,
+    rawCount: state.rawCount,
+    columnVisibility: state.columnVisibility,
+    filteredColumns: state.filteredColumns,
+    filterValue: state.filterValue,
+    filterApplied: state.filterApplied,
+    sortedParams: state.sortedParams,
+    enumFilterParams: state.enumFilterParams,
+  }));
 
   useEffect(() => {
     const params = JSON.stringify({
@@ -38,9 +47,10 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
       filterValue,
       filterApplied,
       sortedParams,
+      enumFilterParams,
     });
     window.localStorage.setItem('tableParams', params);
-  }, [isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, filterApplied, sortedParams]);
+  }, [isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, filterApplied, sortedParams, enumFilterParams]);
 
   const asyncToggleHandle = (): void => {
     dispatch(changeAsync(!isAsync));

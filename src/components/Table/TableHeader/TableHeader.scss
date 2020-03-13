@@ -6,8 +6,17 @@
     white-space: nowrap;
 
     text-align: end;
+    vertical-align: bottom;
 
     background-color: rgb(216, 215, 215);
+  }
+
+  // .toggleWrapper {
+  //   display: inline-flex;
+  //   flex-direction: column;
+  // }
+  .EnumfilterButton {
+    display: block;
   }
 }
 

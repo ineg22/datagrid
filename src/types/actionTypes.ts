@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { PersonType, StateType, SortBy } from './index';
+import { PersonType, StateType, SortBy, EnumFilterParam } from './index';
 import {
   DELETE_PERSON,
   LOADING_END,
@@ -19,6 +19,8 @@ import {
   SET_SORT_PARAMS,
   SET_SORT_LIGHT,
   SET_TRANSFORMED,
+  SET_ENUM_FILTER_PARAM,
+  SET_ENUM_FILTER_PARAMS,
 } from '../constants/action-types';
 
 interface DeletePersonActionType {
@@ -91,6 +93,14 @@ interface SetSortLightActionType {
   type: typeof SET_SORT_LIGHT;
   payload: [number, boolean];
 }
+interface SetEnumFilterParamActionType {
+  type: typeof SET_ENUM_FILTER_PARAM;
+  payload: EnumFilterParam;
+}
+interface SetEnumFilterParamsActionType {
+  type: typeof SET_ENUM_FILTER_PARAMS;
+  payload: Array<EnumFilterParam>;
+}
 
 export type ActionTypes =
   | DeletePersonActionType
@@ -110,6 +120,8 @@ export type ActionTypes =
   | ApplyFilterActionType
   | SetSortActionType
   | SetSortLightActionType
-  | SetTransformedPersonsActionType;
+  | SetTransformedPersonsActionType
+  | SetEnumFilterParamActionType
+  | SetEnumFilterParamsActionType;
 
 export type thunkLoadDataActionType<R> = ThunkAction<R, StateType, unknown, ActionTypes>;

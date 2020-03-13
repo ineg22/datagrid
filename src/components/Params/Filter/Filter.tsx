@@ -3,25 +3,18 @@ import Popup from 'reactjs-popup';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateType } from '../../../types/index';
 
-import {
-  changeFilterValue,
-  changeFilteredColumns,
-  transformPersons,
-  applyFilters,
-} from '../../../actions/index';
+import { changeFilterValue, changeFilteredColumns, transformPersons, applyFilters } from '../../../actions/index';
 
 import { COLUMN_TITLES, STRING_COLUMNS } from '../../../constants/columns';
 import './Filter.scss';
 
 const Filter: React.FC = () => {
   const dispatch = useDispatch();
-  const { filteredColumns, filterValue, filterApplied } = useSelector(
-    (state: StateType) => ({
-      filteredColumns: state.filteredColumns,
-      filterValue: state.filterValue,
-      filterApplied: state.filterApplied,
-    })
-  );
+  const { filteredColumns, filterValue, filterApplied } = useSelector((state: StateType) => ({
+    filteredColumns: state.filteredColumns,
+    filterValue: state.filterValue,
+    filterApplied: state.filterApplied,
+  }));
 
   const checkboxHandler = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const number = Number(evt.target.dataset.columns);
@@ -37,9 +30,7 @@ const Filter: React.FC = () => {
     if (filterApplied) dispatch(transformPersons());
   };
 
-  const applyFilterHandler = (
-    evt: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  const applyFilterHandler = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const value = evt.target.checked;
     dispatch(applyFilters(value));
     dispatch(transformPersons());
@@ -59,14 +50,7 @@ const Filter: React.FC = () => {
             if (STRING_COLUMNS[i])
               return (
                 <label className="checkboxWrapper" key={i}>
-                  <input
-                    type="checkbox"
-                    name={`column${i}`}
-                    id={`column${i}`}
-                    data-columns={i}
-                    onChange={checkboxHandler}
-                    checked={el}
-                  />
+                  <input type="checkbox" name={`column${i}`} id={`column${i}`} data-columns={i} onChange={checkboxHandler} checked={el} />
                   {COLUMN_TITLES[i]}
                 </label>
               );
@@ -74,14 +58,7 @@ const Filter: React.FC = () => {
           })}
         </div>
       </Popup>
-      <input
-        type="text"
-        placeholder="string value"
-        name="filterInput"
-        className="filterInput"
-        value={filterValue}
-        onChange={inputHandler}
-      />
+      <input type="text" placeholder="string value" name="filterInput" className="filterInput" value={filterValue} onChange={inputHandler} />
       <label htmlFor="applyFilterCheckbox">
         <input
           type="checkbox"

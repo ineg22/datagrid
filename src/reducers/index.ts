@@ -15,10 +15,17 @@ import {
   APPLY_FILTER,
   SET_SORT_PARAMS,
   SET_TRANSFORMED,
+  SET_ENUM_FILTER_PARAMS,
 } from '../constants/action-types';
 
 const tableParamsString = window.localStorage.getItem('tableParams');
 const tableParams = tableParamsString ? JSON.parse(tableParamsString) : null;
+
+const initialEnumFilterParams = [
+  { col: 3, val: [true, true] },
+  { col: 4, val: [true, true, true, true, true, true, true] },
+  { col: 6, val: [true, true] },
+];
 
 const initialState: StateType = {
   persons: [],
@@ -35,6 +42,7 @@ const initialState: StateType = {
   filterValue: tableParams ? tableParams.filterValue : '',
   filterApplied: tableParams ? tableParams.filterValue : false,
   sortedParams: tableParams ? tableParams.sortedParams : [],
+  enumFilterParams: tableParams ? tableParams.enumFilterParams : initialEnumFilterParams,
 };
 
 function rootReducer(state = initialState, action: ActionTypes): StateType {
@@ -67,6 +75,8 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, sortedParams: action.payload };
     case SET_TRANSFORMED:
       return { ...state, transformed: action.payload };
+    case SET_ENUM_FILTER_PARAMS:
+      return { ...state, enumFilterParams: action.payload };
     default:
       return state;
   }
