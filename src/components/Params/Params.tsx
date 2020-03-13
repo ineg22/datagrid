@@ -4,11 +4,7 @@ import { StateType } from '../../types/index';
 
 import Visibility from './Visibility/Visibility';
 import Filter from './Filter/Filter';
-import {
-  changeAsync,
-  changeVirtualize,
-  changeCount,
-} from '../../actions/index';
+import { changeAsync, changeVirtualize, changeCount } from '../../actions/index';
 
 import './Params.scss';
 
@@ -19,25 +15,18 @@ interface Props {
 const Params: React.FC<Props> = ({ renderHandle }) => {
   const dispatch = useDispatch();
 
-  const {
-    isAsync,
-    isVirtualize,
-    rawCount,
-    columnVisibility,
-    filteredColumns,
-    filterValue,
-    filterApplied,
-    sortedParams,
-  } = useSelector((state: StateType) => ({
-    isAsync: state.isAsync,
-    isVirtualize: state.isVirtualize,
-    rawCount: state.rawCount,
-    columnVisibility: state.columnVisibility,
-    filteredColumns: state.filteredColumns,
-    filterValue: state.filterValue,
-    filterApplied: state.filterApplied,
-    sortedParams: state.sortedParams,
-  }));
+  const { isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, filterApplied, sortedParams } = useSelector(
+    (state: StateType) => ({
+      isAsync: state.isAsync,
+      isVirtualize: state.isVirtualize,
+      rawCount: state.rawCount,
+      columnVisibility: state.columnVisibility,
+      filteredColumns: state.filteredColumns,
+      filterValue: state.filterValue,
+      filterApplied: state.filterApplied,
+      sortedParams: state.sortedParams,
+    })
+  );
 
   useEffect(() => {
     const params = JSON.stringify({
@@ -51,16 +40,7 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
       sortedParams,
     });
     window.localStorage.setItem('tableParams', params);
-  }, [
-    isAsync,
-    isVirtualize,
-    rawCount,
-    columnVisibility,
-    filteredColumns,
-    filterValue,
-    filterApplied,
-    sortedParams,
-  ]);
+  }, [isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, filterApplied, sortedParams]);
 
   const asyncToggleHandle = (): void => {
     dispatch(changeAsync(!isAsync));
@@ -78,14 +58,7 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
     <div className="sticker">
       <form className="formWrapper">
         <label htmlFor="asyncToggle">
-          <input
-            type="checkbox"
-            checked={isAsync}
-            name="asyncToggle"
-            id="asyncToggle"
-            className="asyncToggle"
-            onChange={asyncToggleHandle}
-          />
+          <input type="checkbox" checked={isAsync} name="asyncToggle" id="asyncToggle" className="asyncToggle" onChange={asyncToggleHandle} />
           async
         </label>
         <label htmlFor="virtualizeToggle">

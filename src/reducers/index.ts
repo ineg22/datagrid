@@ -30,12 +30,8 @@ const initialState: StateType = {
   isAsync: tableParams ? tableParams.isAsync : false,
   isVirtualize: tableParams ? tableParams.isVirtualize : false,
   rawCount: tableParams ? tableParams.rawCount : 20,
-  columnVisibility: tableParams
-    ? tableParams.columnVisibility
-    : new Array(7).fill(true),
-  filteredColumns: tableParams
-    ? tableParams.filteredColumns
-    : new Array(7).fill(false),
+  columnVisibility: tableParams ? tableParams.columnVisibility : new Array(7).fill(true),
+  filteredColumns: tableParams ? tableParams.filteredColumns : new Array(7).fill(false),
   filterValue: tableParams ? tableParams.filterValue : '',
   filterApplied: tableParams ? tableParams.filterValue : false,
   sortedParams: tableParams ? tableParams.sortedParams : [],

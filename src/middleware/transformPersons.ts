@@ -1,12 +1,7 @@
 import { Middleware } from 'redux';
 
 import { TRANSFORM_PERSONS } from '../constants/action-types';
-import {
-  COLUMN_TITLES,
-  NUMBER_COLUMNS,
-  ENUM_COLUMNS,
-  ENUM_MASK,
-} from '../constants/columns';
+import { COLUMN_TITLES, NUMBER_COLUMNS, ENUM_COLUMNS, ENUM_MASK } from '../constants/columns';
 import { PersonType, SortBy } from '../types/index';
 import { ActionTypes } from '../types/actionTypes';
 import { setTransformed } from '../actions/index';
@@ -19,13 +14,9 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
       const sortPersons = (persons: Array<PersonType>): Array<PersonType> => {
         const { sortedParams } = getState();
 
-        const firstNonZeroValue = (acc: number, el: number): number =>
-          acc ? acc : el;
+        const firstNonZeroValue = (acc: number, el: number): number => (acc ? acc : el);
 
-        const fieldSorter = (fields: Array<SortBy>) => (
-          a: PersonType,
-          b: PersonType
-        ): number =>
+        const fieldSorter = (fields: Array<SortBy>) => (a: PersonType, b: PersonType): number =>
           fields
             .map(field => {
               const dir = field.up ? -1 : 1;
@@ -63,9 +54,7 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
       const filterPersons = (persons: Array<PersonType>): Array<PersonType> => {
         const { filteredColumns, filterValue } = getState();
 
-        const filteredColumnNames: Array<PersonKeys> = COLUMN_TITLES.filter(
-          (_, i) => filteredColumns[i]
-        );
+        const filteredColumnNames: Array<PersonKeys> = COLUMN_TITLES.filter((_, i) => filteredColumns[i]);
 
         const transformedPersons = persons.filter((el: PersonType) => {
           let isSatisfy = false;
@@ -90,9 +79,7 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
         const { persons, filterApplied, sortedParams } = getState();
 
         const afterFilter = filterApplied ? filterPersons(persons) : persons;
-        const afterSort = sortedParams.length
-          ? sortPersons(afterFilter)
-          : afterFilter;
+        const afterSort = sortedParams.length ? sortPersons(afterFilter) : afterFilter;
 
         return dispatch(setTransformed(afterSort));
       }

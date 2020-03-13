@@ -13,6 +13,12 @@ export interface SortBy {
   up: boolean;
   down: boolean;
 }
+
+export interface EnumFilterParam {
+  col: number;
+  val: Array<boolean>;
+}
+
 export interface StateType {
   persons: Array<PersonType>;
   transformedByFilter: Array<PersonType>;
@@ -28,4 +34,5 @@ export interface StateType {
   filterValue: string;
   filterApplied: boolean;
   sortedParams: Array<SortBy>;
+  // enumFilterParams: Array<EnumFilterParam>;
 }

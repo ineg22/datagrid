@@ -112,9 +112,4 @@ export type ActionTypes =
   | SetSortLightActionType
   | SetTransformedPersonsActionType;
 
-export type thunkLoadDataActionType<R> = ThunkAction<
-  R,
-  StateType,
-  unknown,
-  ActionTypes
->;
+export type thunkLoadDataActionType<R> = ThunkAction<R, StateType, unknown, ActionTypes>;

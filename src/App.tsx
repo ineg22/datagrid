@@ -1,13 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import thunkLoadData from './actions/thunkLoadData';
-import {
-  loadOffline,
-  showError,
-  applyFilters,
-  setSortParams,
-} from './actions/index';
+import { loadOffline, showError, applyFilters, setSortParams } from './actions/index';
 import { StateType } from './types/index';
 
 import Params from './components/Params/Params';
@@ -16,14 +11,12 @@ import './App.scss';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const { isLoading, isAsync, rawCount, error } = useSelector(
-    (state: StateType) => ({
-      isLoading: state.isLoading,
-      isAsync: state.isAsync,
-      rawCount: state.rawCount,
-      error: state.error,
-    })
-  );
+  const { isLoading, isAsync, rawCount, error } = useSelector((state: StateType) => ({
+    isLoading: state.isLoading,
+    isAsync: state.isAsync,
+    rawCount: state.rawCount,
+    error: state.error,
+  }));
 
   const renderTable = (count: number): void => {
     dispatch(setSortParams([]));
@@ -36,6 +29,10 @@ const App: React.FC = () => {
       dispatch(loadOffline(count));
     }
   };
+
+  useEffect(() => {
+    renderTable(rawCount);
+  }, []);
 
   return (
     <div className="App">

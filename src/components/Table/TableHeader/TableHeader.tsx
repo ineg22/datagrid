@@ -12,12 +12,10 @@ const TableHeader: React.FC<Params> = ({ columnVisibility }) => {
   return (
     <tr className="header__raw">
       {COLUMN_TITLES.map((el, i) => {
-        const className = columnVisibility[i]
-          ? 'header__col'
-          : 'header__col hidden';
+        const className = columnVisibility[i] ? 'header__col' : 'header__col hidden';
         return (
           <th className={className} key={i}>
-            <span>{el}</span>
+            {el === 'app_version' ? <span>is_stable</span> : <span>{el}</span>}
             {COLUMNS_WITH_SORT[i] && <SortWidget col={i} />}
           </th>
         );

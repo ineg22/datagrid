@@ -54,9 +54,7 @@ export function changeFilteredColumns(payload: Array<boolean>): ActionTypes {
 export function setTransformedBySort(payload: Array<PersonType>): ActionTypes {
   return { type: SET_TRANSFORMED_BY_SORT, payload: payload };
 }
-export function setTransformedByFilter(
-  payload: Array<PersonType>
-): ActionTypes {
+export function setTransformedByFilter(payload: Array<PersonType>): ActionTypes {
   return { type: SET_TRANSFORMED_BY_FILTER, payload: payload };
 }
 export function setTransformed(payload: Array<PersonType>): ActionTypes {
