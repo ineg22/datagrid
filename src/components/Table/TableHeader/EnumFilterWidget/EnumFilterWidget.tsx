@@ -27,7 +27,6 @@ const EnumFilterWidget: React.FC<Props> = ({ col }) => {
   const checkboxHandler = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const number = Number(evt.target.dataset.columns);
     const value = evt.target.checked;
-    console.log(value);
     currentFilterValues[number] = value;
     dispatch(setEnumFilterParam({ col, val: currentFilterValues }));
     dispatch(transformPersons());

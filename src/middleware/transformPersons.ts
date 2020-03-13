@@ -1,8 +1,8 @@
 import { Middleware } from 'redux';
 
 import { TRANSFORM_PERSONS } from '../constants/action-types';
-import { COLUMN_TITLES, NUMBER_COLUMNS, ENUM_COLUMNS, ENUM_MASK } from '../constants/columns';
-import { PersonType, SortBy } from '../types/index';
+import { COLUMN_TITLES, NUMBER_COLUMNS, ENUM_COLUMNS, ENUM_MASK, MUSK_MAP } from '../constants/columns';
+import { PersonType, SortBy, EnumFilterParam } from '../types/index';
 import { ActionTypes } from '../types/actionTypes';
 import { setTransformed } from '../actions/index';
 
@@ -75,13 +75,46 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
         return transformedPersons;
       };
 
+      const enumFilter = (persons: Array<PersonType>): Array<PersonType> => {
+        const { enumFilterParams } = getState();
+        const transformedPersons: Array<PersonType> = [];
+
+        persons.forEach((person: PersonType) => {
+          let remove = false;
+          enumFilterParams.forEach(({ col, val }: EnumFilterParam) => {
+            const title = COLUMN_TITLES[col];
+            const value = person[title];
+
+            const ENUM_VALUES = MUSK_MAP[col];
+            const filteredValues: Array<string> = [];
+            val.forEach((el: boolean, i) => {
+              if (!el) filteredValues.push(ENUM_VALUES[i]);
+            });
+
+            if (filteredValues.includes(value.toString())) {
+              remove = true;
+            }
+          });
+          if (!remove) transformedPersons.push({ ...person });
+        });
+
+        return transformedPersons;
+      };
+
       if (action.type === TRANSFORM_PERSONS) {
-        const { persons, filterApplied, sortedParams } = getState();
+        const { persons, filterApplied, sortedParams, enumFilterParams } = getState();
+
+        const enumFilterApplied = enumFilterParams.reduce((acc: number, el: EnumFilterParam) => {
+          const applied = el.val.reduce((acc: number, el: boolean) => (!el ? ++acc : acc), 0);
+          if (applied) return ++acc;
+          return acc;
+        }, 0);
 
         const afterFilter = filterApplied ? filterPersons(persons) : persons;
         const afterSort = sortedParams.length ? sortPersons(afterFilter) : afterFilter;
+        const afterEnumFilter = enumFilterApplied ? enumFilter(afterSort) : afterSort;
 
-        return dispatch(setTransformed(afterSort));
+        return dispatch(setTransformed(afterEnumFilter));
       }
 
       return next(action);
