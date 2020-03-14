@@ -10,9 +10,6 @@ import {
   CHANGE_FILTER_VALUE,
   CHANGE_FILTERED_COLUMNS,
   TRANSFORM_PERSONS,
-  SET_TRANSFORMED_BY_SORT,
-  SET_TRANSFORMED_BY_FILTER,
-  APPLY_FILTER,
   SET_SORT_PARAMS,
   SET_SORT_LIGHT,
   SET_TRANSFORMED,
@@ -53,20 +50,11 @@ export function changeFilterValue(payload: string): ActionTypes {
 export function changeFilteredColumns(payload: Array<boolean>): ActionTypes {
   return { type: CHANGE_FILTERED_COLUMNS, payload: payload };
 }
-export function setTransformedBySort(payload: Array<PersonType>): ActionTypes {
-  return { type: SET_TRANSFORMED_BY_SORT, payload: payload };
-}
-export function setTransformedByFilter(payload: Array<PersonType>): ActionTypes {
-  return { type: SET_TRANSFORMED_BY_FILTER, payload: payload };
-}
-export function setTransformed(payload: Array<PersonType>): ActionTypes {
+export function setTransformed(payload: Array<PersonType> | null): ActionTypes {
   return { type: SET_TRANSFORMED, payload: payload };
 }
 export function transformPersons(): ActionTypes {
   return { type: TRANSFORM_PERSONS };
-}
-export function applyFilters(payload: boolean): ActionTypes {
-  return { type: APPLY_FILTER, payload: payload };
 }
 export function setSortParams(payload: Array<SortBy>): ActionTypes {
   return { type: SET_SORT_PARAMS, payload: payload };

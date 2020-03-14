@@ -21,9 +21,7 @@ export interface EnumFilterParam {
 
 export interface StateType {
   persons: Array<PersonType>;
-  transformedByFilter: Array<PersonType>;
-  transformedBySort: Array<PersonType>;
-  transformed: Array<PersonType>;
+  transformed: Array<PersonType> | null;
   isLoading: boolean;
   error: Error | null;
   isAsync: boolean;
@@ -32,7 +30,6 @@ export interface StateType {
   columnVisibility: Array<boolean>;
   filteredColumns: Array<boolean>;
   filterValue: string;
-  filterApplied: boolean;
   sortedParams: Array<SortBy>;
   enumFilterParams: Array<EnumFilterParam>;
 }

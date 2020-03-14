@@ -12,11 +12,10 @@ const Table: React.FC = () => {
     persons: state.persons,
     columnVisibility: state.columnVisibility,
     transformed: state.transformed,
-    filterApplied: state.filterApplied,
     sortedParams: state.sortedParams,
   }));
 
-  const renderedPersons = transformed.length ? transformed : persons;
+  const renderedPersons = transformed ? transformed : persons;
 
   return (
     <table className="table">

@@ -13,9 +13,6 @@ import {
   CHANGE_FILTER_VALUE,
   CHANGE_FILTERED_COLUMNS,
   TRANSFORM_PERSONS,
-  SET_TRANSFORMED_BY_SORT,
-  SET_TRANSFORMED_BY_FILTER,
-  APPLY_FILTER,
   SET_SORT_PARAMS,
   SET_SORT_LIGHT,
   SET_TRANSFORMED,
@@ -66,24 +63,12 @@ interface ChangeFilteredColumnsActionType {
   type: typeof CHANGE_FILTERED_COLUMNS;
   payload: Array<boolean>;
 }
-interface SetTransformedBySortPersonsActionType {
-  type: typeof SET_TRANSFORMED_BY_SORT;
-  payload: Array<PersonType>;
-}
-interface SetTransformedByFilterPersonsActionType {
-  type: typeof SET_TRANSFORMED_BY_FILTER;
-  payload: Array<PersonType>;
-}
-interface SetTransformedPersonsActionType {
+interface SetTransformedActionType {
   type: typeof SET_TRANSFORMED;
-  payload: Array<PersonType>;
+  payload: Array<PersonType> | null;
 }
 interface TransformPersonsActionType {
   type: typeof TRANSFORM_PERSONS;
-}
-interface ApplyFilterActionType {
-  type: typeof APPLY_FILTER;
-  payload: boolean;
 }
 interface SetSortActionType {
   type: typeof SET_SORT_PARAMS;
@@ -115,12 +100,9 @@ export type ActionTypes =
   | ChangeFilterValueActionType
   | ChangeFilteredColumnsActionType
   | TransformPersonsActionType
-  | SetTransformedBySortPersonsActionType
-  | SetTransformedByFilterPersonsActionType
-  | ApplyFilterActionType
   | SetSortActionType
   | SetSortLightActionType
-  | SetTransformedPersonsActionType
+  | SetTransformedActionType
   | SetEnumFilterParamActionType
   | SetEnumFilterParamsActionType;
 

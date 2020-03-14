@@ -3,17 +3,16 @@ import Popup from 'reactjs-popup';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateType } from '../../../types/index';
 
-import { changeFilterValue, changeFilteredColumns, transformPersons, applyFilters } from '../../../actions/index';
+import { changeFilterValue, changeFilteredColumns, transformPersons } from '../../../actions/index';
 
 import { COLUMN_TITLES, STRING_COLUMNS } from '../../../constants/columns';
 import './Filter.scss';
 
 const Filter: React.FC = () => {
   const dispatch = useDispatch();
-  const { filteredColumns, filterValue, filterApplied } = useSelector((state: StateType) => ({
+  const { filteredColumns, filterValue } = useSelector((state: StateType) => ({
     filteredColumns: state.filteredColumns,
     filterValue: state.filterValue,
-    filterApplied: state.filterApplied,
   }));
 
   const checkboxHandler = (evt: React.ChangeEvent<HTMLInputElement>): void => {
@@ -21,18 +20,12 @@ const Filter: React.FC = () => {
     const newFilterColumns = [...filteredColumns];
     newFilterColumns[number] = !newFilterColumns[number];
     dispatch(changeFilteredColumns(newFilterColumns));
-    if (filterApplied) dispatch(transformPersons());
+    dispatch(transformPersons());
   };
 
   const inputHandler = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     const value = evt.target.value.trim().toLowerCase();
     dispatch(changeFilterValue(value));
-    if (filterApplied) dispatch(transformPersons());
-  };
-
-  const applyFilterHandler = (evt: React.ChangeEvent<HTMLInputElement>): void => {
-    const value = evt.target.checked;
-    dispatch(applyFilters(value));
     dispatch(transformPersons());
   };
 
@@ -59,17 +52,6 @@ const Filter: React.FC = () => {
         </div>
       </Popup>
       <input type="text" placeholder="string value" name="filterInput" className="filterInput" value={filterValue} onChange={inputHandler} />
-      <label htmlFor="applyFilterCheckbox">
-        <input
-          type="checkbox"
-          checked={filterApplied}
-          name="applyFilterCheckbox"
-          id="applyFilterCheckbox"
-          className="applyFilterCheckbox"
-          onChange={applyFilterHandler}
-        />
-        apply filter
-      </label>
     </div>
   );
 };

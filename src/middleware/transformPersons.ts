@@ -102,13 +102,15 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
       };
 
       if (action.type === TRANSFORM_PERSONS) {
-        const { persons, filterApplied, sortedParams, enumFilterParams } = getState();
+        const { persons, sortedParams, enumFilterParams, filteredColumns, filterValue } = getState();
 
         const enumFilterApplied = enumFilterParams.reduce((acc: number, el: EnumFilterParam) => {
           const applied = el.val.reduce((acc: number, el: boolean) => (!el ? ++acc : acc), 0);
           if (applied) return ++acc;
           return acc;
         }, 0);
+
+        const filterApplied = filterValue || filteredColumns.reduce((acc: number, el: boolean) => (el ? ++acc : acc), 0);
 
         const afterFilter = filterApplied ? filterPersons(persons) : persons;
         const afterSort = sortedParams.length ? sortPersons(afterFilter) : afterFilter;

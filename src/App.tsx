@@ -2,8 +2,17 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import thunkLoadData from './actions/thunkLoadData';
-import { loadOffline, showError, applyFilters, setSortParams } from './actions/index';
+import {
+  loadOffline,
+  showError,
+  setSortParams,
+  setTransformed,
+  setEnumFilterParams,
+  changeFilterValue,
+  changeFilteredColumns,
+} from './actions/index';
 import { StateType } from './types/index';
+import { initialEnumFilterParams } from './constants/columns';
 
 import Params from './components/Params/Params';
 import Table from './components/Table/Table';
@@ -19,8 +28,11 @@ const App: React.FC = () => {
   }));
 
   const renderTable = (count: number): void => {
+    dispatch(setTransformed(null));
+    dispatch(setEnumFilterParams(initialEnumFilterParams));
     dispatch(setSortParams([]));
-    dispatch(applyFilters(false));
+    dispatch(changeFilterValue(''));
+    dispatch(changeFilteredColumns(new Array(7).fill(true)));
 
     if (error) dispatch(showError(null));
     if (isAsync) {

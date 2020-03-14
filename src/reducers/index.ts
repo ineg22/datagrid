@@ -10,37 +10,26 @@ import {
   CHANGE_VISIBILITY,
   CHANGE_FILTER_VALUE,
   CHANGE_FILTERED_COLUMNS,
-  SET_TRANSFORMED_BY_FILTER,
-  SET_TRANSFORMED_BY_SORT,
-  APPLY_FILTER,
   SET_SORT_PARAMS,
   SET_TRANSFORMED,
   SET_ENUM_FILTER_PARAMS,
 } from '../constants/action-types';
+import { initialEnumFilterParams } from '../constants/columns';
 
 const tableParamsString = window.localStorage.getItem('tableParams');
 const tableParams = tableParamsString ? JSON.parse(tableParamsString) : null;
 
-const initialEnumFilterParams = [
-  { col: 3, val: [true, true] },
-  { col: 4, val: [true, true, true, true, true, true, true] },
-  { col: 6, val: [true, true] },
-];
-
 const initialState: StateType = {
   persons: [],
-  transformedByFilter: [],
-  transformedBySort: [],
-  transformed: [],
+  transformed: null,
   isLoading: false,
   error: null,
   isAsync: tableParams ? tableParams.isAsync : false,
   isVirtualize: tableParams ? tableParams.isVirtualize : false,
   rawCount: tableParams ? tableParams.rawCount : 20,
   columnVisibility: tableParams ? tableParams.columnVisibility : new Array(7).fill(true),
-  filteredColumns: tableParams ? tableParams.filteredColumns : new Array(7).fill(false),
+  filteredColumns: tableParams ? tableParams.filteredColumns : new Array(7).fill(true),
   filterValue: tableParams ? tableParams.filterValue : '',
-  filterApplied: tableParams ? tableParams.filterValue : false,
   sortedParams: tableParams ? tableParams.sortedParams : [],
   enumFilterParams: tableParams ? tableParams.enumFilterParams : initialEnumFilterParams,
 };
@@ -65,12 +54,6 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, filteredColumns: action.payload };
     case CHANGE_FILTER_VALUE:
       return { ...state, filterValue: action.payload };
-    case SET_TRANSFORMED_BY_SORT:
-      return { ...state, transformedBySort: action.payload };
-    case SET_TRANSFORMED_BY_FILTER:
-      return { ...state, transformedByFilter: action.payload };
-    case APPLY_FILTER:
-      return { ...state, filterApplied: action.payload };
     case SET_SORT_PARAMS:
       return { ...state, sortedParams: action.payload };
     case SET_TRANSFORMED:
