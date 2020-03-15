@@ -1,6 +1,8 @@
 .content__raw {
   position: relative;
 
+  height: 30px;
+
   background-color: rgb(238, 237, 237);
 
   &:hover {
@@ -25,11 +27,16 @@
 
     .rawOverflow {
       display: flex;
+      align-items: center;
+      height: 30px;
     }
   }
 
   .content__col {
     padding: 3px 10px;
+
+    white-space: nowrap;
+
     user-select: none;
 
     &:nth-child(7) {

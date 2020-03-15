@@ -1,8 +1,10 @@
 .sticker {
   position: sticky;
-  width: 100%;
+  width: calc(100% - 45px);
   top: 0;
   z-index: 5;
+
+  margin-right: 45px;
 }
 
 .formWrapper {
