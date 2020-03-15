@@ -1,18 +1,36 @@
 .content__raw {
+  position: relative;
+
   background-color: rgb(238, 237, 237);
 
   &:hover {
     background-color: rgb(216, 215, 215);
+    cursor: pointer;
 
     .content__col {
       &:nth-child(1) {
         background-color: rgb(216, 215, 215);
       }
     }
+
+    &.selected {
+      background-color: rgb(132, 240, 155);
+
+      .content__col {
+        &:nth-child(1) {
+          background-color: rgb(132, 240, 155);
+        }
+      }
+    }
+
+    // .rawOverflow {
+    //   display: flex;
+    // }
   }
 
   .content__col {
     padding: 3px 10px;
+    user-select: none;
 
     &:nth-child(7) {
       text-align: center;
@@ -26,6 +44,34 @@
       text-align: initial;
 
       background-color: rgb(238, 237, 237);
+    }
+  }
+
+  // .rawOverflow {
+  //   position: absolute;
+
+  //   display: none;
+  //   flex-wrap: nowrap;
+
+  //   .selectRawCheckbox {
+  //     cursor: pointer;
+  //   }
+
+  //   .delRawButton {
+  //     cursor: pointer;
+  //   }
+  // }
+
+  // &
+  // }
+}
+
+.selected {
+  background-color: rgb(132, 240, 155);
+
+  .content__col {
+    &:nth-child(1) {
+      background-color: rgb(132, 240, 155);
     }
   }
 }

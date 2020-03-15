@@ -10,6 +10,7 @@ import {
   setEnumFilterParams,
   changeFilterValue,
   changeFilteredColumns,
+  setSelectedRaws,
   transformPersons,
 } from './actions/index';
 import { StateType } from './types/index';
@@ -29,6 +30,7 @@ const App: React.FC = () => {
   }));
 
   const renderTable = (count: number): void => {
+    dispatch(setSelectedRaws([]));
     dispatch(setTransformed(null));
     dispatch(setEnumFilterParams(initialEnumFilterParams));
     dispatch(setSortParams([]));

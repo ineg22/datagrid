@@ -19,6 +19,12 @@ export interface EnumFilterParam {
   val: Array<boolean>;
 }
 
+export interface SelectRaws {
+  id: number;
+  ctrl?: boolean;
+  shift?: boolean;
+}
+
 export interface StateType {
   persons: Array<PersonType>;
   transformed: Array<PersonType> | null;
@@ -32,4 +38,5 @@ export interface StateType {
   filterValue: string;
   sortedParams: Array<SortBy>;
   enumFilterParams: Array<EnumFilterParam>;
+  selectedRaws: Array<number>;
 }

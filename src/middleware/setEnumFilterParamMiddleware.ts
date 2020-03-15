@@ -5,7 +5,7 @@ import { ActionTypes } from '../types/actionTypes';
 import { EnumFilterParam } from '../types/index';
 import { setEnumFilterParams } from '../actions/index';
 
-const setSortMiddleware: Middleware = ({ dispatch, getState }) => {
+const setEnumFilterParamMiddleware: Middleware = ({ dispatch, getState }) => {
   return function(next) {
     return function(action): ActionTypes {
       if (action.type === SET_ENUM_FILTER_PARAM) {
@@ -23,4 +23,4 @@ const setSortMiddleware: Middleware = ({ dispatch, getState }) => {
   };
 };
 
-export default setSortMiddleware;
+export default setEnumFilterParamMiddleware;

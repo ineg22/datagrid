@@ -13,6 +13,7 @@ import {
   SET_SORT_PARAMS,
   SET_TRANSFORMED,
   SET_ENUM_FILTER_PARAMS,
+  SET_SELECTED_RAWS,
 } from '../constants/action-types';
 import { initialEnumFilterParams } from '../constants/columns';
 
@@ -24,6 +25,7 @@ const initialState: StateType = {
   transformed: null,
   isLoading: false,
   error: null,
+  selectedRaws: [],
   isAsync: tableParams ? tableParams.isAsync : false,
   isVirtualize: tableParams ? tableParams.isVirtualize : false,
   rawCount: tableParams ? tableParams.rawCount : 20,
@@ -60,6 +62,8 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, transformed: action.payload };
     case SET_ENUM_FILTER_PARAMS:
       return { ...state, enumFilterParams: action.payload };
+    case SET_SELECTED_RAWS:
+      return { ...state, selectedRaws: action.payload };
     default:
       return state;
   }

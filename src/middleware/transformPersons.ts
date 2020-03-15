@@ -1,7 +1,7 @@
 import { Middleware } from 'redux';
 
 import { TRANSFORM_PERSONS } from '../constants/action-types';
-import { COLUMN_TITLES, NUMBER_COLUMNS, ENUM_COLUMNS, ENUM_MASK, MUSK_MAP } from '../constants/columns';
+import { COLUMN_TITLES, NUMBER_COLUMNS, ENUM_COLUMNS, ENUM_MASK, MUSK_MAP, STRING_COLUMNS } from '../constants/columns';
 import { PersonType, SortBy, EnumFilterParam } from '../types/index';
 import { ActionTypes } from '../types/actionTypes';
 import { setTransformed } from '../actions/index';
@@ -110,7 +110,11 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
           return acc;
         }, 0);
 
-        const filterApplied = filterValue || filteredColumns.reduce((acc: number, el: boolean) => (el ? ++acc : acc), 0);
+        const stringFilteredColumns = filteredColumns.reduce((acc: number, el: boolean, i: number) => {
+          if (el && STRING_COLUMNS[i]) return ++acc;
+          return acc;
+        }, 0);
+        const filterApplied = filterValue && stringFilteredColumns;
 
         const afterFilter = filterApplied ? filterPersons(persons) : persons;
         const afterSort = sortedParams.length ? sortPersons(afterFilter) : afterFilter;

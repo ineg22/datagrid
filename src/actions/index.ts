@@ -15,10 +15,12 @@ import {
   SET_TRANSFORMED,
   SET_ENUM_FILTER_PARAMS,
   SET_ENUM_FILTER_PARAM,
+  SET_SELECTED_RAWS,
+  SELECT_RAWS,
 } from '../constants/action-types';
 
 import { ActionTypes } from '../types/actionTypes';
-import { PersonType, SortBy, EnumFilterParam } from '../types/index';
+import { PersonType, SortBy, EnumFilterParam, SelectRaws } from '../types/index';
 
 export function endLoading(payload: Array<PersonType>): ActionTypes {
   return { type: LOADING_END, payload };
@@ -67,4 +69,10 @@ export function setEnumFilterParam(payload: EnumFilterParam): ActionTypes {
 }
 export function setEnumFilterParams(payload: Array<EnumFilterParam>): ActionTypes {
   return { type: SET_ENUM_FILTER_PARAMS, payload: payload };
+}
+export function setSelectedRaws(payload: Array<number>): ActionTypes {
+  return { type: SET_SELECTED_RAWS, payload: payload };
+}
+export function selectRaws(payload: SelectRaws): ActionTypes {
+  return { type: SELECT_RAWS, payload: payload };
 }
