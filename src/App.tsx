@@ -10,6 +10,7 @@ import {
   setEnumFilterParams,
   changeFilterValue,
   changeFilteredColumns,
+  transformPersons,
 } from './actions/index';
 import { StateType } from './types/index';
 import { initialEnumFilterParams } from './constants/columns';
@@ -43,7 +44,18 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    renderTable(rawCount);
+    const tableParamsString = window.localStorage.getItem('tableParams');
+
+    if (!tableParamsString) {
+      renderTable(rawCount);
+    } else {
+      if (isAsync) {
+        dispatch(thunkLoadData(rawCount));
+      } else {
+        dispatch(loadOffline(rawCount));
+      }
+      dispatch(transformPersons());
+    }
   }, []);
 
   return (

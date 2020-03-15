@@ -37,9 +37,10 @@ const EnumFilterWidget: React.FC<Props> = ({ col }) => {
       <div className="toggleWrapper">
         {currentFilterValues.length &&
           currentFilterValues.map((el, i) => (
-            <label className="checkboxWrapper" key={i}>
+            <label className="checkboxWrapper checkboxWrapper__toggle" key={i}>
               <input type="checkbox" name={`column${i}`} id={`column${i}`} data-columns={i} onChange={checkboxHandler} checked={el} />
-              {MUSK_MAP[col][i]}
+              <span className="slider"></span>
+              <span>{MUSK_MAP[col][i]}</span>
             </label>
           ))}
       </div>
