@@ -44,9 +44,7 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
             })
             .reduce(firstNonZeroValue, 0);
 
-        const sortedPersons = persons
-          // .map((el: PersonType) => ({ ...el }))
-          .sort(fieldSorter(sortedParams));
+        const sortedPersons = persons.map((el: PersonType) => ({ ...el })).sort(fieldSorter(sortedParams));
 
         return sortedPersons;
       };

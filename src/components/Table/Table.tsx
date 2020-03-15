@@ -1,8 +1,8 @@
-import React, { useEffect, KeyboardEvent } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import './Table.scss';
-import { deleteSelectedRaws, transformPersons } from '../../actions/index';
+import { deleteSelectedRaws, transformPersons, setSelectedRaws } from '../../actions/index';
 
 import TableHeader from './TableHeader/TableHeader';
 import TableRaw from './TableRaw/TableRaw';
@@ -20,10 +20,11 @@ const Table: React.FC = () => {
   }));
 
   useEffect(() => {
-    const deleteHandle = (evt: KeyboardEventInit): void => {
+    const deleteHandle = (evt: KeyboardEvent): void => {
       if (evt.key === ESC_KEY) {
         dispatch(deleteSelectedRaws());
         dispatch(transformPersons());
+        dispatch(setSelectedRaws([]));
       }
     };
 

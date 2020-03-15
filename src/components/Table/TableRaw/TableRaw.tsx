@@ -30,6 +30,9 @@ const TableRaw: React.FC<Params> = ({ person, columnVisibility }) => {
   const delRawButtonHandler = (evt: MouseEvent<HTMLButtonElement>): void => {
     evt.stopPropagation();
     dispatch(deleteCurrentRaw(id));
+    if (selectedRaws.includes(id)) {
+      dispatch(selectRaws({ id, ctrl: true, shift: false }));
+    }
     dispatch(transformPersons());
   };
 

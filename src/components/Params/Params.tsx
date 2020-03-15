@@ -4,7 +4,8 @@ import { StateType } from '../../types/index';
 
 import Visibility from './Visibility/Visibility';
 import Filter from './Filter/Filter';
-import { changeAsync, changeVirtualize, changeCount, deleteSelectedRaws, transformPersons } from '../../actions/index';
+import ExportCSVButton from './ExportCSVButton/ExportCSVButton';
+import { changeAsync, changeVirtualize, changeCount, deleteSelectedRaws, transformPersons, setSelectedRaws } from '../../actions/index';
 
 import './Params.scss';
 
@@ -15,18 +16,27 @@ interface Props {
 const Params: React.FC<Props> = ({ renderHandle }) => {
   const dispatch = useDispatch();
 
-  const { isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, sortedParams, enumFilterParams } = useSelector(
-    (state: StateType) => ({
-      isAsync: state.isAsync,
-      isVirtualize: state.isVirtualize,
-      rawCount: state.rawCount,
-      columnVisibility: state.columnVisibility,
-      filteredColumns: state.filteredColumns,
-      filterValue: state.filterValue,
-      sortedParams: state.sortedParams,
-      enumFilterParams: state.enumFilterParams,
-    })
-  );
+  const {
+    isAsync,
+    isVirtualize,
+    rawCount,
+    columnVisibility,
+    filteredColumns,
+    filterValue,
+    sortedParams,
+    enumFilterParams,
+    selectedRaws,
+  } = useSelector((state: StateType) => ({
+    isAsync: state.isAsync,
+    isVirtualize: state.isVirtualize,
+    rawCount: state.rawCount,
+    columnVisibility: state.columnVisibility,
+    filteredColumns: state.filteredColumns,
+    filterValue: state.filterValue,
+    sortedParams: state.sortedParams,
+    enumFilterParams: state.enumFilterParams,
+    selectedRaws: state.selectedRaws,
+  }));
 
   useEffect(() => {
     const params = JSON.stringify({
@@ -38,9 +48,10 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
       filterValue,
       sortedParams,
       enumFilterParams,
+      selectedRaws,
     });
     window.localStorage.setItem('tableParams', params);
-  }, [isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, sortedParams, enumFilterParams]);
+  }, [isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, sortedParams, enumFilterParams, selectedRaws]);
 
   const asyncToggleHandle = (): void => {
     dispatch(changeAsync(!isAsync));
@@ -57,6 +68,7 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
   const onDeleteClickHandler = (): void => {
     dispatch(deleteSelectedRaws());
     dispatch(transformPersons());
+    dispatch(setSelectedRaws([]));
   };
 
   return (
@@ -123,9 +135,10 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
       <div className="additionalTools">
         <Filter />
         <Visibility />
-        <button className="deleteRawsButton" title="press DELETE on keyboard" onClick={onDeleteClickHandler}>
+        <button className="deleteRawsButton" title="press DELETE on keyboard" onClick={onDeleteClickHandler} disabled={Boolean(!selectedRaws.length)}>
           delete selected raws
         </button>
+        <ExportCSVButton />
       </div>
     </div>
   );

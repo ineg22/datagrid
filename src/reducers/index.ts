@@ -25,7 +25,7 @@ const initialState: StateType = {
   transformed: null,
   isLoading: false,
   error: null,
-  selectedRaws: [],
+  selectedRaws: tableParams ? tableParams.selectedRaws : [],
   isAsync: tableParams ? tableParams.isAsync : false,
   isVirtualize: tableParams ? tableParams.isVirtualize : false,
   rawCount: tableParams ? tableParams.rawCount : 20,

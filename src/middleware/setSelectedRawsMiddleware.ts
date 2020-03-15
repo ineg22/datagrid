@@ -13,7 +13,11 @@ const setSelectedRawsMiddleware: Middleware = ({ dispatch, getState }) => {
         const { selectedRaws, persons, transformed } = getState();
         let newSelectedRaws: Array<number> = [];
         if (!ctrl && !shift) {
-          newSelectedRaws.push(id);
+          if (selectedRaws.length === 1 && selectedRaws[0] === id) {
+            newSelectedRaws = [];
+          } else {
+            newSelectedRaws = [id];
+          }
         } else if (ctrl && !shift) {
           const alreadyIn = selectedRaws.includes(id);
 
