@@ -4,7 +4,7 @@ import { StateType } from '../../types/index';
 
 import Visibility from './Visibility/Visibility';
 import Filter from './Filter/Filter';
-import { changeAsync, changeVirtualize, changeCount } from '../../actions/index';
+import { changeAsync, changeVirtualize, changeCount, deleteSelectedRaws, transformPersons } from '../../actions/index';
 
 import './Params.scss';
 
@@ -52,6 +52,11 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
 
   const changeCountHandle = (count: number): void => {
     dispatch(changeCount(count));
+  };
+
+  const onDeleteClickHandler = (): void => {
+    dispatch(deleteSelectedRaws());
+    dispatch(transformPersons());
   };
 
   return (
@@ -118,6 +123,9 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
       <div className="additionalTools">
         <Filter />
         <Visibility />
+        <button className="deleteRawsButton" title="press DELETE on keyboard" onClick={onDeleteClickHandler}>
+          delete selected raws
+        </button>
       </div>
     </div>
   );

@@ -81,8 +81,7 @@
     background: #ffffff;
     border: 0 solid #000000;
     border-radius: 50%;
-    box-shadow: 1.2px 1.2px 6.3px rgba(0, 0, 0, 0.99),
-      0 0 1.2px rgba(13, 13, 13, 0.99);
+    box-shadow: 1.2px 1.2px 6.3px rgba(0, 0, 0, 0.99), 0 0 1.2px rgba(13, 13, 13, 0.99);
     cursor: pointer;
 
     -webkit-appearance: none;
@@ -124,8 +123,7 @@
     background: #ffffff;
     border: 0 solid #000000;
     border-radius: 1px;
-    box-shadow: 1.2px 1.2px 6.3px rgba(0, 0, 0, 0.99),
-      0 0 1.2px rgba(13, 13, 13, 0.99);
+    box-shadow: 1.2px 1.2px 6.3px rgba(0, 0, 0, 0.99), 0 0 1.2px rgba(13, 13, 13, 0.99);
     cursor: pointer;
   }
 
@@ -136,4 +134,9 @@
   &:focus::-ms-fill-upper {
     background: #f1edea;
   }
+}
+
+.deleteRawsButton {
+  cursor: pointer;
+  margin-left: 20px;
 }

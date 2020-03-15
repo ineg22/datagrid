@@ -3,9 +3,7 @@ import { PersonType } from '../types/index';
 
 import { endLoading, showError, startLoading } from '../actions/index';
 
-const thunkLoadData = (count: number): thunkLoadDataActionType<void> => async (
-  dispatch
-): Promise<void> => {
+const thunkLoadData = (count: number): thunkLoadDataActionType<void> => async (dispatch): Promise<void> => {
   const URL = `https://my.api.mockaroo.com/datagrid.json?key=${process.env.REACT_APP_NOT_SECRET_CODE}`;
   dispatch(startLoading());
 

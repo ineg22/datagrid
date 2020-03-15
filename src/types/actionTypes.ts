@@ -19,6 +19,8 @@ import {
   SET_ENUM_FILTER_PARAMS,
   SET_SELECTED_RAWS,
   SELECT_RAWS,
+  DELETE_SELECTED_RAWS,
+  DELETE_CURRENT_RAW,
 } from '../constants/action-types';
 
 interface LoadingStartActionType {
@@ -91,6 +93,13 @@ interface SelectRawsActionType {
   type: typeof SELECT_RAWS;
   payload: SelectRaws;
 }
+interface DeleteSelectedRawsActionType {
+  type: typeof DELETE_SELECTED_RAWS;
+}
+interface DeleteCurrentRawActionType {
+  type: typeof DELETE_CURRENT_RAW;
+  payload: number;
+}
 
 export type ActionTypes =
   | LoadingEndActionType
@@ -110,6 +119,8 @@ export type ActionTypes =
   | SetEnumFilterParamActionType
   | SetEnumFilterParamsActionType
   | SetSelectedRawsActionType
-  | SelectRawsActionType;
+  | SelectRawsActionType
+  | DeleteSelectedRawsActionType
+  | DeleteCurrentRawActionType;
 
 export type thunkLoadDataActionType<R> = ThunkAction<R, StateType, unknown, ActionTypes>;

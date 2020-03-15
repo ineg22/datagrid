@@ -17,6 +17,8 @@ import {
   SET_ENUM_FILTER_PARAM,
   SET_SELECTED_RAWS,
   SELECT_RAWS,
+  DELETE_SELECTED_RAWS,
+  DELETE_CURRENT_RAW,
 } from '../constants/action-types';
 
 import { ActionTypes } from '../types/actionTypes';
@@ -75,4 +77,10 @@ export function setSelectedRaws(payload: Array<number>): ActionTypes {
 }
 export function selectRaws(payload: SelectRaws): ActionTypes {
   return { type: SELECT_RAWS, payload: payload };
+}
+export function deleteSelectedRaws(): ActionTypes {
+  return { type: DELETE_SELECTED_RAWS };
+}
+export function deleteCurrentRaw(payload: number): ActionTypes {
+  return { type: DELETE_CURRENT_RAW, payload: payload };
 }

@@ -33,7 +33,7 @@ const Filter: React.FC = () => {
     <div className="filterWrapper">
       <Popup
         trigger={<button className="filterButton">filter in:</button>}
-        on={['click']}
+        on={['click', 'hover']}
         position="bottom center"
         contentStyle={{ zIndex: 20 }}
         overlayStyle={{ zIndex: 10 }}

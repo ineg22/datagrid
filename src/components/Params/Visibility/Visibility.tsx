@@ -25,7 +25,7 @@ const Visibility: React.FC = () => {
     <>
       <Popup
         trigger={<button className="visibilityButton">hide cols</button>}
-        on={['click']}
+        on={['click', 'hover']}
         position="bottom center"
         contentStyle={{ zIndex: 20 }}
         overlayStyle={{ zIndex: 10 }}
@@ -34,14 +34,7 @@ const Visibility: React.FC = () => {
           {columnVisibility.map((el, i) => {
             return (
               <label className="checkboxWrapper" key={i}>
-                <input
-                  type="checkbox"
-                  name={`column${i}`}
-                  id={`column${i}`}
-                  data-columns={i}
-                  onChange={checkboxHandler}
-                  checked={el}
-                />
+                <input type="checkbox" name={`column${i}`} id={`column${i}`} data-columns={i} onChange={checkboxHandler} checked={el} />
                 {COLUMN_TITLES[i]}
               </label>
             );

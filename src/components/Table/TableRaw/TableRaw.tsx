@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectRaws } from '../../../actions/index';
+import { selectRaws, deleteCurrentRaw, transformPersons } from '../../../actions/index';
 import { PersonType, StateType } from '../../../types/index';
 import './TableRaw.scss';
 
@@ -27,6 +27,12 @@ const TableRaw: React.FC<Params> = ({ person, columnVisibility }) => {
     dispatch(selectRaws({ id, ctrl: isCtrl, shift: isShift }));
   };
 
+  const delRawButtonHandler = (evt: MouseEvent<HTMLButtonElement>): void => {
+    evt.stopPropagation();
+    dispatch(deleteCurrentRaw(id));
+    dispatch(transformPersons());
+  };
+
   return (
     <tr className={rawClassName} onClick={rawClickHandler}>
       {contentArray.map((el, i) => {
@@ -38,10 +44,11 @@ const TableRaw: React.FC<Params> = ({ person, columnVisibility }) => {
           </td>
         );
       })}
-      {/* <div className="rawOverflow">
-        <input type="checkbox" className="selectRawCheckbox" />
-        <button className="delRawButton">del</button>
-      </div> */}
+      <td className="rawOverflow">
+        <button className="delRawButton" onClick={delRawButtonHandler}>
+          del
+        </button>
+      </td>
     </tr>
   );
 };

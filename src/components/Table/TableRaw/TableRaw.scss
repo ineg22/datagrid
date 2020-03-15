@@ -23,9 +23,9 @@
       }
     }
 
-    // .rawOverflow {
-    //   display: flex;
-    // }
+    .rawOverflow {
+      display: flex;
+    }
   }
 
   .content__col {
@@ -47,23 +47,16 @@
     }
   }
 
-  // .rawOverflow {
-  //   position: absolute;
+  .rawOverflow {
+    position: absolute;
 
-  //   display: none;
-  //   flex-wrap: nowrap;
+    display: none;
+    flex-wrap: nowrap;
 
-  //   .selectRawCheckbox {
-  //     cursor: pointer;
-  //   }
-
-  //   .delRawButton {
-  //     cursor: pointer;
-  //   }
-  // }
-
-  // &
-  // }
+    .delRawButton {
+      cursor: pointer;
+    }
+  }
 }
 
 .selected {
