@@ -18,9 +18,11 @@ import { initialEnumFilterParams } from './constants/columns';
 
 import Params from './components/Params/Params';
 import Table from './components/Table/Table';
+import useLocalStorage from './components/useLocalStorage';
 import './App.scss';
 
 const App: React.FC = () => {
+  useLocalStorage();
   const dispatch = useDispatch();
   const { isLoading, isAsync, rawCount, error } = useSelector((state: StateType) => ({
     isLoading: state.isLoading,

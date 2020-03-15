@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { StateType, PersonType } from '../../../types/index';
-import { COLUMN_TITLES } from '../../../constants/columns';
+import { StateType, PersonType } from '../../types/index';
+import { COLUMN_TITLES } from '../../constants/columns';
 
 const ExportCSVButton: React.FC = () => {
   const { persons, transformed } = useSelector((state: StateType) => ({ persons: state.persons, transformed: state.transformed }));

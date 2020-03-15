@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateType } from '../../types/index';
 
 import Visibility from './Visibility/Visibility';
 import Filter from './Filter/Filter';
-import ExportCSVButton from './ExportCSVButton/ExportCSVButton';
+import ExportCSVButton from './ExportCSVButton';
 import { changeAsync, changeVirtualize, changeCount, deleteSelectedRaws, transformPersons, setSelectedRaws } from '../../actions/index';
 
 import './Params.scss';
@@ -16,42 +16,12 @@ interface Props {
 const Params: React.FC<Props> = ({ renderHandle }) => {
   const dispatch = useDispatch();
 
-  const {
-    isAsync,
-    isVirtualize,
-    rawCount,
-    columnVisibility,
-    filteredColumns,
-    filterValue,
-    sortedParams,
-    enumFilterParams,
-    selectedRaws,
-  } = useSelector((state: StateType) => ({
+  const { isAsync, isVirtualize, rawCount, selectedRaws } = useSelector((state: StateType) => ({
     isAsync: state.isAsync,
     isVirtualize: state.isVirtualize,
     rawCount: state.rawCount,
-    columnVisibility: state.columnVisibility,
-    filteredColumns: state.filteredColumns,
-    filterValue: state.filterValue,
-    sortedParams: state.sortedParams,
-    enumFilterParams: state.enumFilterParams,
     selectedRaws: state.selectedRaws,
   }));
-
-  useEffect(() => {
-    const params = JSON.stringify({
-      isAsync,
-      isVirtualize,
-      rawCount,
-      columnVisibility,
-      filteredColumns,
-      filterValue,
-      sortedParams,
-      enumFilterParams,
-      selectedRaws,
-    });
-    window.localStorage.setItem('tableParams', params);
-  }, [isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, sortedParams, enumFilterParams, selectedRaws]);
 
   const asyncToggleHandle = (): void => {
     dispatch(changeAsync(!isAsync));
