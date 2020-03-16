@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Popup from 'reactjs-popup';
 import { StateType } from '../../types/index';
 
 import Visibility from './Visibility/Visibility';
@@ -109,6 +110,30 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
           delete selected raws
         </button>
         <ExportCSVButton />
+        <Popup
+          trigger={
+            <button className="queryExample" title="show query example">
+              show query example
+            </button>
+          }
+          on={['click']}
+          position="bottom center"
+          contentStyle={{ zIndex: 20 }}
+          overlayStyle={{ zIndex: 10 }}
+        >
+          <input
+            type="text"
+            className="queryInputExample"
+            title="click on text to copy it"
+            value={`${`http://localhost:3000/?stringFilterValue=er&gender=Male+Female&shirtSize=XS+S+M&isStable=true`}`}
+            readOnly
+            onClick={(evt: React.SyntheticEvent<HTMLInputElement>): void => {
+              const target: HTMLInputElement = evt.target as HTMLInputElement;
+              target.select();
+              document.execCommand('copy');
+            }}
+          />
+        </Popup>
       </div>
     </div>
   );

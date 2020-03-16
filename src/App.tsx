@@ -14,7 +14,8 @@ import {
   transformPersons,
 } from './actions/index';
 import { StateType } from './types/index';
-import { initialEnumFilterParams, STRING_COLUMNS } from './constants/columns';
+import { STRING_COLUMNS } from './constants/columns';
+import { initialEnumFilterParams } from './constants/init';
 
 import Params from './components/Params/Params';
 import Table from './components/Table/Table';

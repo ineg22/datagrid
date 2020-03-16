@@ -41,6 +41,7 @@
   background-color: rgb(216, 215, 215);
 }
 
+.queryExample,
 .filterButton,
 .goButton,
 .renderButton,
@@ -51,6 +52,17 @@
   &:hover {
     border: 1px solid grey;
   }
+}
+
+.queryExample {
+  margin-left: 20px;
+}
+
+.queryInputExample {
+  width: 90%;
+  text-overflow: ellipsis;
+  border: none;
+  margin: 0 5px;
 }
 
 .rangeCount {

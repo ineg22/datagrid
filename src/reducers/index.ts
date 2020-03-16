@@ -16,7 +16,8 @@ import {
   SET_SELECTED_RAWS,
   SET_VISIBLE_ROWS,
 } from '../constants/action-types';
-import { initialEnumFilterParams, STRING_COLUMNS } from '../constants/columns';
+import { STRING_COLUMNS } from '../constants/columns';
+import { initialEnumFilterParams, stringFilterValue, isEnumQuery, queryEnumValues } from '../constants/init';
 
 const tableParamsString = window.localStorage.getItem('tableParams');
 const tableParams = tableParamsString ? JSON.parse(tableParamsString) : null;
@@ -27,14 +28,14 @@ const initialState: StateType = {
   isLoading: false,
   error: null,
   selectedRaws: tableParams ? tableParams.selectedRaws : [],
-  isAsync: tableParams ? tableParams.isAsync : false,
-  isVirtualize: tableParams ? tableParams.isVirtualize : false,
+  isAsync: tableParams ? tableParams.isAsync : true,
+  isVirtualize: tableParams ? tableParams.isVirtualize : true,
   rawCount: tableParams ? tableParams.rawCount : 1000,
   columnVisibility: tableParams ? tableParams.columnVisibility : new Array(7).fill(true),
   filteredColumns: tableParams ? tableParams.filteredColumns : STRING_COLUMNS,
-  filterValue: tableParams ? tableParams.filterValue : '',
+  filterValue: stringFilterValue ? stringFilterValue : tableParams ? tableParams.filterValue : '',
   sortedParams: tableParams ? tableParams.sortedParams : [],
-  enumFilterParams: tableParams ? tableParams.enumFilterParams : initialEnumFilterParams,
+  enumFilterParams: isEnumQuery ? queryEnumValues : tableParams ? tableParams.enumFilterParams : initialEnumFilterParams,
   visibleRows: [0, 30],
 };
 
