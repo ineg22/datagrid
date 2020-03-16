@@ -125,7 +125,7 @@ const Params: React.FC<Props> = ({ renderHandle }) => {
             type="text"
             className="queryInputExample"
             title="click on text to copy it"
-            value={`${`http://localhost:3000/?stringFilterValue=er&gender=Male+Female&shirtSize=XS+S+M&isStable=true`}`}
+            value={`${`https://hopeful-kirch-b901c7.netlify.com/?stringFilterValue=er&gender=Male+Female&shirtSize=XS+S+M&isStable=true`}`}
             readOnly
             onClick={(evt: React.SyntheticEvent<HTMLInputElement>): void => {
               const target: HTMLInputElement = evt.target as HTMLInputElement;
