@@ -16,7 +16,7 @@ const makeFake = (idx: number): PersonType => {
     last_name: faker.name.lastName(),
     gender: faker.random.arrayElement(genders),
     shirt_size: faker.random.arrayElement(ENUM_MASK),
-    app_name: faker.commerce.productName(),
+    app_name: faker.commerce.productName().split(' ')[0],
     app_version: Number(faker.finance.amount(0.1, 5.0, 2)) >= 1,
   };
 };

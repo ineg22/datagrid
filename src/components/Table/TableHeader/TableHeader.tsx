@@ -11,18 +11,20 @@ interface Params {
 
 const TableHeader: React.FC<Params> = ({ columnVisibility }) => {
   return (
-    <tr className="header__raw">
+    <div className="header__raw">
       {COLUMN_TITLES.map((el, i) => {
         const className = columnVisibility[i] ? 'header__col' : 'header__col hidden';
         return (
-          <th className={className} key={i}>
-            {ENUM_FILTER_COLUMNS[i] && <EnumFilterWidget col={i} />}
-            {el === 'app_version' ? <span>is_stable</span> : <span>{el}</span>}
-            {COLUMNS_WITH_SORT[i] && <SortWidget col={i} />}
-          </th>
+          <div className={className} key={i}>
+            <div className="headerColContentWrapper">
+              {ENUM_FILTER_COLUMNS[i] && <EnumFilterWidget col={i} />}
+              {el === 'app_version' ? <span>is_stable</span> : <span>{el}</span>}
+              {COLUMNS_WITH_SORT[i] && <SortWidget col={i} />}
+            </div>
+          </div>
         );
       })}
-    </tr>
+    </div>
   );
 };
 

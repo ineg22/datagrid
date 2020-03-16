@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import './Table.scss';
 import { deleteSelectedRaws, transformPersons, setSelectedRaws } from '../../actions/index';
 
 import TableHeader from './TableHeader/TableHeader';
@@ -37,16 +36,12 @@ const Table: React.FC = () => {
   const renderedPersons = transformed ? transformed : persons;
 
   return (
-    <table className="table">
-      <thead>
-        <TableHeader columnVisibility={columnVisibility} />
-      </thead>
-      <tbody>
-        {renderedPersons.map(person => (
-          <TableRaw person={person} key={person.id} columnVisibility={columnVisibility} />
-        ))}
-      </tbody>
-    </table>
+    <>
+      <TableHeader columnVisibility={columnVisibility} />
+      {renderedPersons.map(person => (
+        <TableRaw person={person} key={person.id} columnVisibility={columnVisibility} />
+      ))}
+    </>
   );
 };
 

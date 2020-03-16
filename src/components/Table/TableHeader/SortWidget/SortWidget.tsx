@@ -35,7 +35,6 @@ const SortWidget: React.FC<Props> = ({ col }) => {
 
   return (
     <>
-      {' '}
       <button className="SortButton" onClick={sortHandle}>
         <span className={sortedUp ? 'sortLabel sortUp sortActive' : 'sortLabel sortUp'}>
           <svg viewBox="0 0 1024 1024" fill="currentColor">

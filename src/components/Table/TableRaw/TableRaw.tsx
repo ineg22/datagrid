@@ -37,22 +37,22 @@ const TableRaw: React.FC<Params> = ({ person, columnVisibility }) => {
   };
 
   return (
-    <tr className={rawClassName} onClick={rawClickHandler}>
+    <div className={rawClassName} onClick={rawClickHandler}>
       {contentArray.map((el, i) => {
         const className = columnVisibility[i] ? 'content__col' : 'content__col hidden';
 
         return (
-          <td className={className} key={i}>
+          <div className={className} key={i}>
             {el}
-          </td>
+          </div>
         );
       })}
-      <td className="rawOverflow">
+      <div className="rawOverflow">
         <button className="delRawButton" onClick={delRawButtonHandler}>
           del
         </button>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 };
 
