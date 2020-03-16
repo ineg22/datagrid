@@ -28,7 +28,7 @@ const initialState: StateType = {
   selectedRaws: tableParams ? tableParams.selectedRaws : [],
   isAsync: tableParams ? tableParams.isAsync : false,
   isVirtualize: tableParams ? tableParams.isVirtualize : false,
-  rawCount: tableParams ? tableParams.rawCount : 20,
+  rawCount: tableParams ? tableParams.rawCount : 1000,
   columnVisibility: tableParams ? tableParams.columnVisibility : new Array(7).fill(true),
   filteredColumns: tableParams ? tableParams.filteredColumns : new Array(7).fill(true),
   filterValue: tableParams ? tableParams.filterValue : '',

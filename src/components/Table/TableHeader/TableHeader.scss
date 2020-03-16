@@ -7,6 +7,8 @@
   flex-wrap: nowrap;
   width: calc(100% - 40px);
 
+  background-color: rgb(216, 215, 215);
+
   .header__col {
     display: flex;
     flex-direction: column;
@@ -14,8 +16,6 @@
     padding: 3px 10px 10px;
 
     white-space: nowrap;
-
-    background-color: rgb(216, 215, 215);
 
     .headerColContentWrapper {
       width: 100%;

@@ -24,11 +24,12 @@ import './App.scss';
 const App: React.FC = () => {
   useLocalStorage();
   const dispatch = useDispatch();
-  const { isLoading, isAsync, rawCount, error } = useSelector((state: StateType) => ({
+  const { isLoading, isAsync, rawCount, error, persons } = useSelector((state: StateType) => ({
     isLoading: state.isLoading,
     isAsync: state.isAsync,
     rawCount: state.rawCount,
     error: state.error,
+    persons: state.persons,
   }));
 
   const renderTable = (count: number): void => {
@@ -58,9 +59,12 @@ const App: React.FC = () => {
       } else {
         dispatch(loadOffline(rawCount));
       }
-      dispatch(transformPersons());
     }
   }, []);
+
+  useEffect(() => {
+    dispatch(transformPersons());
+  }, [persons]);
 
   return (
     <div className="App">
