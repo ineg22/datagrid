@@ -14,7 +14,7 @@ import {
   transformPersons,
 } from './actions/index';
 import { StateType } from './types/index';
-import { initialEnumFilterParams } from './constants/columns';
+import { initialEnumFilterParams, STRING_COLUMNS } from './constants/columns';
 
 import Params from './components/Params/Params';
 import Table from './components/Table/Table';
@@ -38,7 +38,7 @@ const App: React.FC = () => {
     dispatch(setEnumFilterParams(initialEnumFilterParams));
     dispatch(setSortParams([]));
     dispatch(changeFilterValue(''));
-    dispatch(changeFilteredColumns(new Array(7).fill(true)));
+    dispatch(changeFilteredColumns(STRING_COLUMNS));
 
     if (error) dispatch(showError(null));
     if (isAsync) {

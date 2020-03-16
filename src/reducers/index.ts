@@ -14,8 +14,9 @@ import {
   SET_TRANSFORMED,
   SET_ENUM_FILTER_PARAMS,
   SET_SELECTED_RAWS,
+  SET_VISIBLE_ROWS,
 } from '../constants/action-types';
-import { initialEnumFilterParams } from '../constants/columns';
+import { initialEnumFilterParams, STRING_COLUMNS } from '../constants/columns';
 
 const tableParamsString = window.localStorage.getItem('tableParams');
 const tableParams = tableParamsString ? JSON.parse(tableParamsString) : null;
@@ -30,10 +31,11 @@ const initialState: StateType = {
   isVirtualize: tableParams ? tableParams.isVirtualize : false,
   rawCount: tableParams ? tableParams.rawCount : 1000,
   columnVisibility: tableParams ? tableParams.columnVisibility : new Array(7).fill(true),
-  filteredColumns: tableParams ? tableParams.filteredColumns : new Array(7).fill(true),
+  filteredColumns: tableParams ? tableParams.filteredColumns : STRING_COLUMNS,
   filterValue: tableParams ? tableParams.filterValue : '',
   sortedParams: tableParams ? tableParams.sortedParams : [],
   enumFilterParams: tableParams ? tableParams.enumFilterParams : initialEnumFilterParams,
+  visibleRows: [0, 30],
 };
 
 function rootReducer(state = initialState, action: ActionTypes): StateType {
@@ -64,6 +66,8 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, enumFilterParams: action.payload };
     case SET_SELECTED_RAWS:
       return { ...state, selectedRaws: action.payload };
+    case SET_VISIBLE_ROWS:
+      return { ...state, visibleRows: action.payload };
     default:
       return state;
   }

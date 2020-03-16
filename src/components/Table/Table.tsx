@@ -6,7 +6,7 @@ import { deleteSelectedRaws, transformPersons, setSelectedRaws } from '../../act
 import './Table.scss';
 import TableHeader from './TableHeader/TableHeader';
 import TableRaw from './TableRaw/TableRaw';
-import CustomVList from './CustomVList';
+import CustomVList from './CustomVList/CustomVList';
 import { StateType } from '../../types/index';
 
 const ESC_KEY = 'Delete';
@@ -38,7 +38,7 @@ const Table: React.FC = () => {
   return (
     <>
       <TableHeader columnVisibility={columnVisibility} />
-      {transformed && isVirtualize && <CustomVList persons={transformed} columnVisibility={columnVisibility} />}
+      {transformed && isVirtualize && <CustomVList />}
       {transformed && !isVirtualize && transformed.map(person => <TableRaw person={person} key={person.id} columnVisibility={columnVisibility} />)}
     </>
   );

@@ -39,4 +39,5 @@ export interface StateType {
   sortedParams: Array<SortBy>;
   enumFilterParams: Array<EnumFilterParam>;
   selectedRaws: Array<number>;
+  visibleRows: [number, number];
 }

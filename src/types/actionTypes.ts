@@ -21,6 +21,7 @@ import {
   SELECT_RAWS,
   DELETE_SELECTED_RAWS,
   DELETE_CURRENT_RAW,
+  SET_VISIBLE_ROWS,
 } from '../constants/action-types';
 
 interface LoadingStartActionType {
@@ -100,6 +101,10 @@ interface DeleteCurrentRawActionType {
   type: typeof DELETE_CURRENT_RAW;
   payload: number;
 }
+interface SetVisibleRawsActionType {
+  type: typeof SET_VISIBLE_ROWS;
+  payload: [number, number];
+}
 
 export type ActionTypes =
   | LoadingEndActionType
@@ -121,6 +126,7 @@ export type ActionTypes =
   | SetSelectedRawsActionType
   | SelectRawsActionType
   | DeleteSelectedRawsActionType
-  | DeleteCurrentRawActionType;
+  | DeleteCurrentRawActionType
+  | SetVisibleRawsActionType;
 
 export type thunkLoadDataActionType<R> = ThunkAction<R, StateType, unknown, ActionTypes>;

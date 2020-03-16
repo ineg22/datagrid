@@ -19,6 +19,7 @@ import {
   SELECT_RAWS,
   DELETE_SELECTED_RAWS,
   DELETE_CURRENT_RAW,
+  SET_VISIBLE_ROWS,
 } from '../constants/action-types';
 
 import { ActionTypes } from '../types/actionTypes';
@@ -83,4 +84,7 @@ export function deleteSelectedRaws(): ActionTypes {
 }
 export function deleteCurrentRaw(payload: number): ActionTypes {
   return { type: DELETE_CURRENT_RAW, payload: payload };
+}
+export function setVisibleRows(payload: [number, number]): ActionTypes {
+  return { type: SET_VISIBLE_ROWS, payload: payload };
 }
