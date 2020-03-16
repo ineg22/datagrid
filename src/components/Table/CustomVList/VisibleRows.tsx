@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import TableRaw from '../TableRaw/TableRaw';
+import TableRow from '../TableRow/TableRow';
 import { StateType } from '../../../types/index';
 
 const VisibleRows: React.FC = () => {
@@ -13,7 +13,7 @@ const VisibleRows: React.FC = () => {
   const [from, to] = visibleRows;
 
   return (
-    <>{transformed && transformed.slice(from, to).map(person => <TableRaw person={person} key={person.id} columnVisibility={columnVisibility} />)}</>
+    <>{transformed && transformed.slice(from, to).map(person => <TableRow person={person} key={person.id} columnVisibility={columnVisibility} />)}</>
   );
 };
 

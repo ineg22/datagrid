@@ -13,7 +13,7 @@ import {
   SET_SORT_PARAMS,
   SET_TRANSFORMED,
   SET_ENUM_FILTER_PARAMS,
-  SET_SELECTED_RAWS,
+  SET_SELECTED_ROWS,
   SET_VISIBLE_ROWS,
 } from '../constants/action-types';
 import { STRING_COLUMNS } from '../constants/columns';
@@ -27,10 +27,10 @@ const initialState: StateType = {
   transformed: null,
   isLoading: false,
   error: null,
-  selectedRaws: tableParams ? tableParams.selectedRaws : [],
+  selectedRows: tableParams ? tableParams.selectedRows : [],
   isAsync: tableParams ? tableParams.isAsync : true,
   isVirtualize: tableParams ? tableParams.isVirtualize : true,
-  rawCount: tableParams ? tableParams.rawCount : 1000,
+  rowCount: tableParams ? tableParams.rowCount : 1000,
   columnVisibility: tableParams ? tableParams.columnVisibility : new Array(7).fill(true),
   filteredColumns: tableParams ? tableParams.filteredColumns : STRING_COLUMNS,
   filterValue: stringFilterValue ? stringFilterValue : tableParams ? tableParams.filterValue : '',
@@ -52,7 +52,7 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
     case CHANGE_VIRTUALIZE:
       return { ...state, isVirtualize: action.payload };
     case CHANGE_COUNT:
-      return { ...state, rawCount: action.payload };
+      return { ...state, rowCount: action.payload };
     case CHANGE_VISIBILITY:
       return { ...state, columnVisibility: action.payload };
     case CHANGE_FILTERED_COLUMNS:
@@ -65,8 +65,8 @@ function rootReducer(state = initialState, action: ActionTypes): StateType {
       return { ...state, transformed: action.payload };
     case SET_ENUM_FILTER_PARAMS:
       return { ...state, enumFilterParams: action.payload };
-    case SET_SELECTED_RAWS:
-      return { ...state, selectedRaws: action.payload };
+    case SET_SELECTED_ROWS:
+      return { ...state, selectedRows: action.payload };
     case SET_VISIBLE_ROWS:
       return { ...state, visibleRows: action.payload };
     default:

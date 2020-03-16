@@ -16,8 +16,6 @@ const shirtSize = urlParams.get('shirtSize')?.split(' ');
 const isStable = urlParams.get('isStable')?.split(' ');
 
 export const isEnumQuery = Boolean(gender || shirtSize || isStable);
-console.log(window.location);
-console.log(stringFilterValue, gender, shirtSize, isStable);
 
 export const queryEnumValues: Array<EnumFilterParam> = [];
 ['', '', '', gender, shirtSize, '', isStable].forEach((el, i) => {

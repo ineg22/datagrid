@@ -58,13 +58,13 @@ const transformPersons: Middleware = ({ dispatch, getState }) => {
           let isSatisfy = false;
 
           filteredColumnNames.forEach((title: PersonKeys) => {
-            const rawSatisfy = el[title]
+            const rowSatisfy = el[title]
               .toString()
               .trim()
               .toLowerCase()
               .includes(filterValue);
 
-            if (rawSatisfy) isSatisfy = true;
+            if (rowSatisfy) isSatisfy = true;
           });
 
           return isSatisfy;

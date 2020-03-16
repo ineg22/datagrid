@@ -11,7 +11,7 @@ interface Params {
 
 const TableHeader: React.FC<Params> = ({ columnVisibility }) => {
   return (
-    <div className="header__raw">
+    <div className="header__row">
       {COLUMN_TITLES.map((el, i) => {
         const className = columnVisibility[i] ? 'header__col' : 'header__col hidden';
         return (

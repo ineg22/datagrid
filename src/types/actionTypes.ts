@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { PersonType, StateType, SortBy, EnumFilterParam, SelectRaws } from './index';
+import { PersonType, StateType, SortBy, EnumFilterParam, SelectRows } from './index';
 import {
   LOADING_END,
   LOADING_START,
@@ -17,10 +17,10 @@ import {
   SET_TRANSFORMED,
   SET_ENUM_FILTER_PARAM,
   SET_ENUM_FILTER_PARAMS,
-  SET_SELECTED_RAWS,
-  SELECT_RAWS,
-  DELETE_SELECTED_RAWS,
-  DELETE_CURRENT_RAW,
+  SET_SELECTED_ROWS,
+  SELECT_ROWS,
+  DELETE_SELECTED_ROWS,
+  DELETE_CURRENT_ROW,
   SET_VISIBLE_ROWS,
 } from '../constants/action-types';
 
@@ -86,22 +86,22 @@ interface SetEnumFilterParamsActionType {
   type: typeof SET_ENUM_FILTER_PARAMS;
   payload: Array<EnumFilterParam>;
 }
-interface SetSelectedRawsActionType {
-  type: typeof SET_SELECTED_RAWS;
+interface SetSelectedRowsActionType {
+  type: typeof SET_SELECTED_ROWS;
   payload: Array<number>;
 }
-interface SelectRawsActionType {
-  type: typeof SELECT_RAWS;
-  payload: SelectRaws;
+interface SelectRowsActionType {
+  type: typeof SELECT_ROWS;
+  payload: SelectRows;
 }
-interface DeleteSelectedRawsActionType {
-  type: typeof DELETE_SELECTED_RAWS;
+interface DeleteSelectedRowsActionType {
+  type: typeof DELETE_SELECTED_ROWS;
 }
-interface DeleteCurrentRawActionType {
-  type: typeof DELETE_CURRENT_RAW;
+interface DeleteCurrentRowActionType {
+  type: typeof DELETE_CURRENT_ROW;
   payload: number;
 }
-interface SetVisibleRawsActionType {
+interface SetVisibleRowsActionType {
   type: typeof SET_VISIBLE_ROWS;
   payload: [number, number];
 }
@@ -123,10 +123,10 @@ export type ActionTypes =
   | SetTransformedActionType
   | SetEnumFilterParamActionType
   | SetEnumFilterParamsActionType
-  | SetSelectedRawsActionType
-  | SelectRawsActionType
-  | DeleteSelectedRawsActionType
-  | DeleteCurrentRawActionType
-  | SetVisibleRawsActionType;
+  | SetSelectedRowsActionType
+  | SelectRowsActionType
+  | DeleteSelectedRowsActionType
+  | DeleteCurrentRowActionType
+  | SetVisibleRowsActionType;
 
 export type thunkLoadDataActionType<R> = ThunkAction<R, StateType, unknown, ActionTypes>;
