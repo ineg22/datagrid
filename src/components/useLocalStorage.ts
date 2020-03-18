@@ -7,39 +7,39 @@ const useLocalStorage = (): void => {
   const {
     isAsync,
     isVirtualize,
-    rawCount,
+    rowCount,
     columnVisibility,
     filteredColumns,
     filterValue,
     sortedParams,
     enumFilterParams,
-    selectedRaws,
+    selectedRows,
   } = useSelector((state: StateType) => ({
     isAsync: state.isAsync,
     isVirtualize: state.isVirtualize,
-    rawCount: state.rawCount,
+    rowCount: state.rowCount,
     columnVisibility: state.columnVisibility,
     filteredColumns: state.filteredColumns,
     filterValue: state.filterValue,
     sortedParams: state.sortedParams,
     enumFilterParams: state.enumFilterParams,
-    selectedRaws: state.selectedRaws,
+    selectedRows: state.selectedRows,
   }));
 
   useEffect(() => {
     const params = JSON.stringify({
       isAsync,
       isVirtualize,
-      rawCount,
+      rowCount,
       columnVisibility,
       filteredColumns,
       filterValue,
       sortedParams,
       enumFilterParams,
-      selectedRaws,
+      selectedRows,
     });
     window.localStorage.setItem('tableParams', params);
-  }, [isAsync, isVirtualize, rawCount, columnVisibility, filteredColumns, filterValue, sortedParams, enumFilterParams, selectedRaws]);
+  }, [isAsync, isVirtualize, rowCount, columnVisibility, filteredColumns, filterValue, sortedParams, enumFilterParams, selectedRows]);
 };
 
 export default useLocalStorage;

@@ -1,31 +1,31 @@
 import { Middleware } from 'redux';
 
-import { SELECT_RAWS } from '../constants/action-types';
+import { SELECT_ROWS } from '../constants/action-types';
 import { PersonType } from '../types/index';
 import { ActionTypes } from '../types/actionTypes';
-import { setSelectedRaws } from '../actions/index';
+import { setSelectedRows } from '../actions/index';
 
-const setSelectedRawsMiddleware: Middleware = ({ dispatch, getState }) => {
+const setSelectedRowsMiddleware: Middleware = ({ dispatch, getState }) => {
   return function(next) {
     return function(action): ActionTypes {
-      if (action.type === SELECT_RAWS) {
+      if (action.type === SELECT_ROWS) {
         const { id, ctrl, shift } = action.payload;
-        const { selectedRaws, persons, transformed } = getState();
-        let newSelectedRaws: Array<number> = [];
+        const { selectedRows, persons, transformed } = getState();
+        let newSelectedRows: Array<number> = [];
         if (!ctrl && !shift) {
-          if (selectedRaws.length === 1 && selectedRaws[0] === id) {
-            newSelectedRaws = [];
+          if (selectedRows.length === 1 && selectedRows[0] === id) {
+            newSelectedRows = [];
           } else {
-            newSelectedRaws = [id];
+            newSelectedRows = [id];
           }
         } else if (ctrl && !shift) {
-          const alreadyIn = selectedRaws.includes(id);
+          const alreadyIn = selectedRows.includes(id);
 
-          newSelectedRaws = alreadyIn ? selectedRaws.filter((el: number) => el !== id) : [...selectedRaws, id];
+          newSelectedRows = alreadyIn ? selectedRows.filter((el: number) => el !== id) : [...selectedRows, id];
         } else if (shift) {
           const activePersons = transformed ? transformed : persons;
           const activePersonsId = activePersons.map((el: PersonType) => el.id);
-          const lastAddedIndex = activePersonsId.indexOf(selectedRaws[selectedRaws.length - 1]);
+          const lastAddedIndex = activePersonsId.indexOf(selectedRows[selectedRows.length - 1]);
           const currentAddedIndex = activePersonsId.indexOf(id);
           let shiftAdded: Array<number> = [];
           if (currentAddedIndex > lastAddedIndex) {
@@ -35,16 +35,16 @@ const setSelectedRawsMiddleware: Middleware = ({ dispatch, getState }) => {
           } else {
             shiftAdded = [currentAddedIndex];
           }
-          selectedRaws.forEach((el: number) => {
-            if (!shiftAdded.includes(el)) newSelectedRaws.push(el);
+          selectedRows.forEach((el: number) => {
+            if (!shiftAdded.includes(el)) newSelectedRows.push(el);
           });
-          newSelectedRaws = [...newSelectedRaws, ...shiftAdded];
+          newSelectedRows = [...newSelectedRows, ...shiftAdded];
         }
-        return dispatch(setSelectedRaws(newSelectedRaws));
+        return dispatch(setSelectedRows(newSelectedRows));
       }
       return next(action);
     };
   };
 };
 
-export default setSelectedRawsMiddleware;
+export default setSelectedRowsMiddleware;

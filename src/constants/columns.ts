@@ -1,4 +1,4 @@
-import { PersonType, EnumFilterParam } from '../types/index';
+import { PersonType } from '../types/index';
 
 type PersonKeys = keyof PersonType;
 
@@ -17,11 +17,3 @@ export const ENUM_STABLE_MASK = ['true', 'false'];
 export const ENUM_MASK = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'];
 
 export const MUSK_MAP = ['', '', '', ENUM_GENDER_MASK, ENUM_MASK, '', ENUM_STABLE_MASK];
-
-export const initialEnumFilterParams: Array<EnumFilterParam> = [];
-MUSK_MAP.forEach((el, i) => {
-  if (el) {
-    const val: Array<boolean> = new Array(el.length).fill(true);
-    initialEnumFilterParams.push({ col: i, val });
-  }
-});

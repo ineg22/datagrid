@@ -2,7 +2,7 @@ import faker from 'faker';
 import { Middleware } from 'redux';
 
 import { ENUM_MASK } from '../constants/columns';
-import { LOAD_OFFLINE, DELETE_SELECTED_RAWS, DELETE_CURRENT_RAW } from '../constants/action-types';
+import { LOAD_OFFLINE, DELETE_SELECTED_ROWS, DELETE_CURRENT_ROW } from '../constants/action-types';
 import { PersonType } from '../types/index';
 import { ActionTypes } from '../types/actionTypes';
 import { endLoading } from '../actions/index';
@@ -33,15 +33,15 @@ const loadDataToStateMiddleware: Middleware = ({ dispatch, getState }) => {
       if (action.type === LOAD_OFFLINE) {
         return dispatch(endLoading(loadFakeData(action.payload)));
       }
-      if (action.type === DELETE_SELECTED_RAWS) {
-        const { persons, selectedRaws } = getState();
+      if (action.type === DELETE_SELECTED_ROWS) {
+        const { persons, selectedRows } = getState();
         const newPersons = persons.filter((el: PersonType) => {
-          if (selectedRaws.includes(el.id)) return false;
+          if (selectedRows.includes(el.id)) return false;
           return true;
         });
         return dispatch(endLoading(newPersons));
       }
-      if (action.type === DELETE_CURRENT_RAW) {
+      if (action.type === DELETE_CURRENT_ROW) {
         const { persons } = getState();
         const newPersons = persons.filter((el: PersonType) => {
           if (el.id === action.payload) return false;

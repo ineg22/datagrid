@@ -15,14 +15,15 @@ import {
   SET_TRANSFORMED,
   SET_ENUM_FILTER_PARAMS,
   SET_ENUM_FILTER_PARAM,
-  SET_SELECTED_RAWS,
-  SELECT_RAWS,
-  DELETE_SELECTED_RAWS,
-  DELETE_CURRENT_RAW,
+  SET_SELECTED_ROWS,
+  SELECT_ROWS,
+  DELETE_SELECTED_ROWS,
+  DELETE_CURRENT_ROW,
+  SET_VISIBLE_ROWS,
 } from '../constants/action-types';
 
 import { ActionTypes } from '../types/actionTypes';
-import { PersonType, SortBy, EnumFilterParam, SelectRaws } from '../types/index';
+import { PersonType, SortBy, EnumFilterParam, SelectRows } from '../types/index';
 
 export function endLoading(payload: Array<PersonType>): ActionTypes {
   return { type: LOADING_END, payload };
@@ -72,15 +73,18 @@ export function setEnumFilterParam(payload: EnumFilterParam): ActionTypes {
 export function setEnumFilterParams(payload: Array<EnumFilterParam>): ActionTypes {
   return { type: SET_ENUM_FILTER_PARAMS, payload: payload };
 }
-export function setSelectedRaws(payload: Array<number>): ActionTypes {
-  return { type: SET_SELECTED_RAWS, payload: payload };
+export function setSelectedRows(payload: Array<number>): ActionTypes {
+  return { type: SET_SELECTED_ROWS, payload: payload };
 }
-export function selectRaws(payload: SelectRaws): ActionTypes {
-  return { type: SELECT_RAWS, payload: payload };
+export function selectRows(payload: SelectRows): ActionTypes {
+  return { type: SELECT_ROWS, payload: payload };
 }
-export function deleteSelectedRaws(): ActionTypes {
-  return { type: DELETE_SELECTED_RAWS };
+export function deleteSelectedRows(): ActionTypes {
+  return { type: DELETE_SELECTED_ROWS };
 }
-export function deleteCurrentRaw(payload: number): ActionTypes {
-  return { type: DELETE_CURRENT_RAW, payload: payload };
+export function deleteCurrentRow(payload: number): ActionTypes {
+  return { type: DELETE_CURRENT_ROW, payload: payload };
+}
+export function setVisibleRows(payload: [number, number]): ActionTypes {
+  return { type: SET_VISIBLE_ROWS, payload: payload };
 }

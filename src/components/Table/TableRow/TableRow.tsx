@@ -1,43 +1,43 @@
 import React, { MouseEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectRaws, deleteCurrentRaw, transformPersons } from '../../../actions/index';
+import { selectRows, deleteCurrentRow, transformPersons } from '../../../actions/index';
 import { PersonType, StateType } from '../../../types/index';
-import './TableRaw.scss';
+import './TableRow.scss';
 
 interface Params {
   person: PersonType;
   columnVisibility: Array<boolean>;
 }
 
-const TableRaw: React.FC<Params> = ({ person, columnVisibility }) => {
+const TableRow: React.FC<Params> = ({ person, columnVisibility }) => {
   const dispatch = useDispatch();
-  const { selectedRaws } = useSelector((state: StateType) => ({
-    selectedRaws: state.selectedRaws,
+  const { selectedRows } = useSelector((state: StateType) => ({
+    selectedRows: state.selectedRows,
   }));
   const { id, first_name, last_name, gender, shirt_size, app_name, app_version } = person;
 
   const contentArray = [id, first_name, last_name, gender, shirt_size, app_name, app_version ? 'true' : 'false'];
 
-  const rawClassName = selectedRaws.includes(id) ? 'content__raw selected' : 'content__raw';
+  const rowClassName = selectedRows.includes(id) ? 'content__row selected' : 'content__row';
 
-  const rawClickHandler = (evt: React.MouseEvent<HTMLTableRowElement>): void => {
+  const rowClickHandler = (evt: React.MouseEvent<HTMLTableRowElement>): void => {
     const isCtrl = evt.ctrlKey;
     const isShift = evt.shiftKey;
-    dispatch(selectRaws({ id, ctrl: isCtrl, shift: isShift }));
+    dispatch(selectRows({ id, ctrl: isCtrl, shift: isShift }));
   };
 
-  const delRawButtonHandler = (evt: MouseEvent<HTMLButtonElement>): void => {
+  const delRowButtonHandler = (evt: MouseEvent<HTMLButtonElement>): void => {
     evt.stopPropagation();
-    dispatch(deleteCurrentRaw(id));
-    if (selectedRaws.includes(id)) {
-      dispatch(selectRaws({ id, ctrl: true, shift: false }));
+    dispatch(deleteCurrentRow(id));
+    if (selectedRows.includes(id)) {
+      dispatch(selectRows({ id, ctrl: true, shift: false }));
     }
     dispatch(transformPersons());
   };
 
   return (
-    <div className={rawClassName} onClick={rawClickHandler}>
+    <div className={rowClassName} onClick={rowClickHandler}>
       {contentArray.map((el, i) => {
         const className = columnVisibility[i] ? 'content__col' : 'content__col hidden';
 
@@ -47,8 +47,8 @@ const TableRaw: React.FC<Params> = ({ person, columnVisibility }) => {
           </div>
         );
       })}
-      <div className="rawOverflow">
-        <button className="delRawButton" onClick={delRawButtonHandler}>
+      <div className="rowOverflow">
+        <button className="delRowButton" onClick={delRowButtonHandler}>
           del
         </button>
       </div>
@@ -56,4 +56,4 @@ const TableRaw: React.FC<Params> = ({ person, columnVisibility }) => {
   );
 };
 
-export default TableRaw;
+export default TableRow;

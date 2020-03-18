@@ -1,4 +1,4 @@
-.header__raw {
+.header__row {
   position: sticky;
   top: 72px;
   z-index: 4;
@@ -16,6 +16,8 @@
     padding: 3px 10px 10px;
 
     white-space: nowrap;
+
+    background-color: rgb(216, 215, 215);
 
     .headerColContentWrapper {
       width: 100%;

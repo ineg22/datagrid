@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { PersonType } from '../../types/index';
-import TableRaw from './TableRaw/TableRaw';
+import { StateType } from '../../../types/index';
+import VisibleRows from './VisibleRows';
+import { setVisibleRows } from '../../../actions/index';
 
-interface Props {
-  persons: Array<PersonType>;
-  columnVisibility: Array<boolean>;
-}
+const CustomVList: React.FC = () => {
+  const dispatch = useDispatch();
+  const { transformed } = useSelector((state: StateType) => ({
+    transformed: state.transformed,
+  }));
 
-const CustomVList: React.FC<Props> = ({ persons, columnVisibility }) => {
   const rowHeight = 30;
   const headerHeight = 165;
-  const fullHeight = headerHeight + rowHeight * persons.length;
+  const fullHeight = transformed ? headerHeight + rowHeight * transformed.length : headerHeight;
 
   let { pageYOffset } = window;
   const { innerHeight } = window;
@@ -19,20 +21,14 @@ const CustomVList: React.FC<Props> = ({ persons, columnVisibility }) => {
     pageYOffset = fullHeight - innerHeight;
   }
   const viewPort = innerHeight - headerHeight;
-  const visibleRowsCount = viewPort / rowHeight + 2;
 
-  const firstPerson = persons.length * rowHeight < viewPort ? 0 : Math.floor(pageYOffset / 30);
+  const firstPerson = transformed ? (transformed.length * rowHeight < viewPort ? 0 : Math.floor(pageYOffset / 30)) : 0;
 
-  const initialVisibleRows = persons
-    .slice(firstPerson, firstPerson + visibleRowsCount)
-    .map(person => <TableRaw person={person} key={person.id} columnVisibility={columnVisibility} />);
-
-  const [visibleRows, setVisibleRows] = useState(initialVisibleRows);
   const [topVirtualSize, setTopVirtualSize] = useState(firstPerson * 30);
   const [bottomVirtualSize, setBottomVirtualSize] = useState(fullHeight - innerHeight > 0 ? fullHeight - innerHeight - firstPerson * 30 : 0);
 
   const virtualUpdate = (): void => {
-    const fullHeight = headerHeight + rowHeight * persons.length;
+    const fullHeight = transformed ? headerHeight + rowHeight * transformed.length : headerHeight;
 
     let { pageYOffset } = window;
     const { innerHeight } = window;
@@ -42,28 +38,25 @@ const CustomVList: React.FC<Props> = ({ persons, columnVisibility }) => {
     if (pageYOffset + innerHeight > fullHeight) {
       pageYOffset = fullHeight - innerHeight;
     }
-    const firstPerson = persons.length * rowHeight < viewPort ? 0 : Math.floor(pageYOffset / 30);
+    const firstPerson = transformed ? (transformed.length * rowHeight < viewPort ? 0 : Math.floor(pageYOffset / 30)) : 0;
     setTopVirtualSize(firstPerson * 30);
     setBottomVirtualSize(fullHeight - innerHeight > 0 ? fullHeight - innerHeight - firstPerson * 30 : 0);
-    const VisibleRows = persons
-      .slice(firstPerson, firstPerson + visibleRowsCount)
-      .map(person => <TableRaw person={person} key={person.id} columnVisibility={columnVisibility} />);
-    setVisibleRows(VisibleRows);
+
+    dispatch(setVisibleRows([firstPerson, firstPerson + visibleRowsCount]));
   };
 
   useEffect(() => {
     document.addEventListener('scroll', virtualUpdate);
+    virtualUpdate();
     return (): void => {
       document.removeEventListener('scroll', virtualUpdate);
     };
-  }, []);
-
-  useEffect(virtualUpdate, [persons, columnVisibility]);
+  }, [transformed]);
 
   return (
     <div className="rowContainer">
       <div className="blockBefore" style={{ height: `${topVirtualSize}px` }}></div>
-      {visibleRows}
+      <VisibleRows />
       <div className="blockAfter" style={{ height: `${bottomVirtualSize}px` }}></div>
     </div>
   );

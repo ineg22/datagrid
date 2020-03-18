@@ -1,4 +1,4 @@
-.content__raw {
+.content__row {
   position: relative;
 
   display: flex;
@@ -28,8 +28,8 @@
       }
     }
 
-    .rawOverflow {
-      .delRawButton {
+    .rowOverflow {
+      .delRowButton {
         display: block;
       }
     }
@@ -82,7 +82,7 @@
     }
   }
 
-  .rawOverflow {
+  .rowOverflow {
     position: absolute;
     top: 0;
     right: -5px;
@@ -95,7 +95,7 @@
 
     background-color: white;
 
-    .delRawButton {
+    .delRowButton {
       display: none;
 
       cursor: pointer;

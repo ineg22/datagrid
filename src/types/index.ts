@@ -19,7 +19,7 @@ export interface EnumFilterParam {
   val: Array<boolean>;
 }
 
-export interface SelectRaws {
+export interface SelectRows {
   id: number;
   ctrl?: boolean;
   shift?: boolean;
@@ -32,11 +32,12 @@ export interface StateType {
   error: Error | null;
   isAsync: boolean;
   isVirtualize: boolean;
-  rawCount: number;
+  rowCount: number;
   columnVisibility: Array<boolean>;
   filteredColumns: Array<boolean>;
   filterValue: string;
   sortedParams: Array<SortBy>;
   enumFilterParams: Array<EnumFilterParam>;
-  selectedRaws: Array<number>;
+  selectedRows: Array<number>;
+  visibleRows: [number, number];
 }

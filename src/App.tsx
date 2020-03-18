@@ -10,11 +10,12 @@ import {
   setEnumFilterParams,
   changeFilterValue,
   changeFilteredColumns,
-  setSelectedRaws,
+  setSelectedRows,
   transformPersons,
 } from './actions/index';
 import { StateType } from './types/index';
-import { initialEnumFilterParams } from './constants/columns';
+import { STRING_COLUMNS } from './constants/columns';
+import { initialEnumFilterParams } from './constants/init';
 
 import Params from './components/Params/Params';
 import Table from './components/Table/Table';
@@ -24,21 +25,21 @@ import './App.scss';
 const App: React.FC = () => {
   useLocalStorage();
   const dispatch = useDispatch();
-  const { isLoading, isAsync, rawCount, error, persons } = useSelector((state: StateType) => ({
+  const { isLoading, isAsync, rowCount, error, persons } = useSelector((state: StateType) => ({
     isLoading: state.isLoading,
     isAsync: state.isAsync,
-    rawCount: state.rawCount,
+    rowCount: state.rowCount,
     error: state.error,
     persons: state.persons,
   }));
 
   const renderTable = (count: number): void => {
-    dispatch(setSelectedRaws([]));
+    dispatch(setSelectedRows([]));
     dispatch(setTransformed(null));
     dispatch(setEnumFilterParams(initialEnumFilterParams));
     dispatch(setSortParams([]));
     dispatch(changeFilterValue(''));
-    dispatch(changeFilteredColumns(new Array(7).fill(true)));
+    dispatch(changeFilteredColumns(STRING_COLUMNS));
 
     if (error) dispatch(showError(null));
     if (isAsync) {
@@ -52,12 +53,12 @@ const App: React.FC = () => {
     const tableParamsString = window.localStorage.getItem('tableParams');
 
     if (!tableParamsString) {
-      renderTable(rawCount);
+      renderTable(rowCount);
     } else {
       if (isAsync) {
-        dispatch(thunkLoadData(rawCount));
+        dispatch(thunkLoadData(rowCount));
       } else {
-        dispatch(loadOffline(rawCount));
+        dispatch(loadOffline(rowCount));
       }
     }
   }, []);
@@ -70,7 +71,7 @@ const App: React.FC = () => {
     <div className="App">
       <Params
         renderHandle={(): void => {
-          renderTable(rawCount);
+          renderTable(rowCount);
         }}
       />
       {isLoading && <p className="loading">loading...</p>}

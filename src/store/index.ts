@@ -5,14 +5,14 @@ import loadDataToStateMiddleware from '../middleware/loadDataToState';
 import transformPersons from '../middleware/transformPersons';
 import setSortMiddleware from '../middleware/setSortMiddleware';
 import setEnumFilterParamMiddleware from '../middleware/setEnumFilterParamMiddleware';
-import setSelectedRawsMiddleware from '../middleware/setSelectedRawsMiddleware';
+import setSelectedRowsMiddleware from '../middleware/setSelectedRowsMiddleware';
 
 import rootReducer from '../reducers/index';
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(
-    applyMiddleware(thunk, loadDataToStateMiddleware, transformPersons, setSortMiddleware, setEnumFilterParamMiddleware, setSelectedRawsMiddleware)
+    applyMiddleware(thunk, loadDataToStateMiddleware, transformPersons, setSortMiddleware, setEnumFilterParamMiddleware, setSelectedRowsMiddleware)
   )
 );
 
